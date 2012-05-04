@@ -1,0 +1,465 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C28143B715539A8500399EA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143B615539A8500399EA4 /* UIKit.framework */; };
+		C28143B915539A8500399EA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143B815539A8500399EA4 /* Foundation.framework */; };
+		C28143BB15539A8500399EA4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143BA15539A8500399EA4 /* CoreGraphics.framework */; };
+		C28143C115539A8500399EA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C28143BF15539A8500399EA4 /* InfoPlist.strings */; };
+		C28143C315539A8500399EA4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C28143C215539A8500399EA4 /* main.m */; };
+		C28143C715539A8500399EA4 /* PAAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C28143C615539A8500399EA4 /* PAAppDelegate.m */; };
+		C28143CA15539A8500399EA4 /* MainStoryboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C28143C815539A8500399EA4 /* MainStoryboard_iPhone.storyboard */; };
+		C28143CD15539A8500399EA4 /* MainStoryboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C28143CB15539A8500399EA4 /* MainStoryboard_iPad.storyboard */; };
+		C28143D015539A8500399EA4 /* PAMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28143CF15539A8500399EA4 /* PAMainViewController.m */; };
+		C28143D315539A8500399EA4 /* PAFlipsideViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C28143D215539A8500399EA4 /* PAFlipsideViewController.m */; };
+		C28143DB15539A8500399EA4 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143DA15539A8500399EA4 /* SenTestingKit.framework */; };
+		C28143DC15539A8500399EA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143B615539A8500399EA4 /* UIKit.framework */; };
+		C28143DD15539A8500399EA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143B815539A8500399EA4 /* Foundation.framework */; };
+		C28143E515539A8500399EA4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = C28143E315539A8500399EA4 /* InfoPlist.strings */; };
+		C28143E815539A8500399EA4 /* PA_SlabType_DemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C28143E715539A8500399EA4 /* PA_SlabType_DemoTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C28143DE15539A8500399EA4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C28143A915539A8500399EA4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C28143B115539A8500399EA4;
+			remoteInfo = "PA SlabType Demo";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C28143B215539A8500399EA4 /* PA SlabType Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PA SlabType Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C28143B615539A8500399EA4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		C28143B815539A8500399EA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		C28143BA15539A8500399EA4 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		C28143BE15539A8500399EA4 /* PA SlabType Demo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PA SlabType Demo-Info.plist"; sourceTree = "<group>"; };
+		C28143C015539A8500399EA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C28143C215539A8500399EA4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		C28143C415539A8500399EA4 /* PA SlabType Demo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PA SlabType Demo-Prefix.pch"; sourceTree = "<group>"; };
+		C28143C515539A8500399EA4 /* PAAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAAppDelegate.h; sourceTree = "<group>"; };
+		C28143C615539A8500399EA4 /* PAAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAAppDelegate.m; sourceTree = "<group>"; };
+		C28143C915539A8500399EA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
+		C28143CC15539A8500399EA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
+		C28143CE15539A8500399EA4 /* PAMainViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAMainViewController.h; sourceTree = "<group>"; };
+		C28143CF15539A8500399EA4 /* PAMainViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAMainViewController.m; sourceTree = "<group>"; };
+		C28143D115539A8500399EA4 /* PAFlipsideViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PAFlipsideViewController.h; sourceTree = "<group>"; };
+		C28143D215539A8500399EA4 /* PAFlipsideViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PAFlipsideViewController.m; sourceTree = "<group>"; };
+		C28143D915539A8500399EA4 /* PA SlabType DemoTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PA SlabType DemoTests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C28143DA15539A8500399EA4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		C28143E215539A8500399EA4 /* PA SlabType DemoTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "PA SlabType DemoTests-Info.plist"; sourceTree = "<group>"; };
+		C28143E415539A8500399EA4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		C28143E615539A8500399EA4 /* PA_SlabType_DemoTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PA_SlabType_DemoTests.h; sourceTree = "<group>"; };
+		C28143E715539A8500399EA4 /* PA_SlabType_DemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PA_SlabType_DemoTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C28143AF15539A8500399EA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C28143B715539A8500399EA4 /* UIKit.framework in Frameworks */,
+				C28143B915539A8500399EA4 /* Foundation.framework in Frameworks */,
+				C28143BB15539A8500399EA4 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C28143D515539A8500399EA4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C28143DB15539A8500399EA4 /* SenTestingKit.framework in Frameworks */,
+				C28143DC15539A8500399EA4 /* UIKit.framework in Frameworks */,
+				C28143DD15539A8500399EA4 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C28143A715539A8500399EA4 = {
+			isa = PBXGroup;
+			children = (
+				C28143BC15539A8500399EA4 /* PA SlabType Demo */,
+				C28143E015539A8500399EA4 /* PA SlabType DemoTests */,
+				C28143B515539A8500399EA4 /* Frameworks */,
+				C28143B315539A8500399EA4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C28143B315539A8500399EA4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C28143B215539A8500399EA4 /* PA SlabType Demo.app */,
+				C28143D915539A8500399EA4 /* PA SlabType DemoTests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C28143B515539A8500399EA4 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				C28143B615539A8500399EA4 /* UIKit.framework */,
+				C28143B815539A8500399EA4 /* Foundation.framework */,
+				C28143BA15539A8500399EA4 /* CoreGraphics.framework */,
+				C28143DA15539A8500399EA4 /* SenTestingKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C28143BC15539A8500399EA4 /* PA SlabType Demo */ = {
+			isa = PBXGroup;
+			children = (
+				C28143C515539A8500399EA4 /* PAAppDelegate.h */,
+				C28143C615539A8500399EA4 /* PAAppDelegate.m */,
+				C28143C815539A8500399EA4 /* MainStoryboard_iPhone.storyboard */,
+				C28143CB15539A8500399EA4 /* MainStoryboard_iPad.storyboard */,
+				C28143CE15539A8500399EA4 /* PAMainViewController.h */,
+				C28143CF15539A8500399EA4 /* PAMainViewController.m */,
+				C28143D115539A8500399EA4 /* PAFlipsideViewController.h */,
+				C28143D215539A8500399EA4 /* PAFlipsideViewController.m */,
+				C28143BD15539A8500399EA4 /* Supporting Files */,
+			);
+			path = "PA SlabType Demo";
+			sourceTree = "<group>";
+		};
+		C28143BD15539A8500399EA4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C28143BE15539A8500399EA4 /* PA SlabType Demo-Info.plist */,
+				C28143BF15539A8500399EA4 /* InfoPlist.strings */,
+				C28143C215539A8500399EA4 /* main.m */,
+				C28143C415539A8500399EA4 /* PA SlabType Demo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		C28143E015539A8500399EA4 /* PA SlabType DemoTests */ = {
+			isa = PBXGroup;
+			children = (
+				C28143E615539A8500399EA4 /* PA_SlabType_DemoTests.h */,
+				C28143E715539A8500399EA4 /* PA_SlabType_DemoTests.m */,
+				C28143E115539A8500399EA4 /* Supporting Files */,
+			);
+			path = "PA SlabType DemoTests";
+			sourceTree = "<group>";
+		};
+		C28143E115539A8500399EA4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				C28143E215539A8500399EA4 /* PA SlabType DemoTests-Info.plist */,
+				C28143E315539A8500399EA4 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C28143B115539A8500399EA4 /* PA SlabType Demo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C28143EB15539A8500399EA4 /* Build configuration list for PBXNativeTarget "PA SlabType Demo" */;
+			buildPhases = (
+				C28143AE15539A8500399EA4 /* Sources */,
+				C28143AF15539A8500399EA4 /* Frameworks */,
+				C28143B015539A8500399EA4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "PA SlabType Demo";
+			productName = "PA SlabType Demo";
+			productReference = C28143B215539A8500399EA4 /* PA SlabType Demo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C28143D815539A8500399EA4 /* PA SlabType DemoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C28143EE15539A8500399EA4 /* Build configuration list for PBXNativeTarget "PA SlabType DemoTests" */;
+			buildPhases = (
+				C28143D415539A8500399EA4 /* Sources */,
+				C28143D515539A8500399EA4 /* Frameworks */,
+				C28143D615539A8500399EA4 /* Resources */,
+				C28143D715539A8500399EA4 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C28143DF15539A8500399EA4 /* PBXTargetDependency */,
+			);
+			name = "PA SlabType DemoTests";
+			productName = "PA SlabType DemoTests";
+			productReference = C28143D915539A8500399EA4 /* PA SlabType DemoTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C28143A915539A8500399EA4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0420;
+				ORGANIZATIONNAME = "Pivotal Action, Inc";
+			};
+			buildConfigurationList = C28143AC15539A8500399EA4 /* Build configuration list for PBXProject "PA SlabType Demo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = C28143A715539A8500399EA4;
+			productRefGroup = C28143B315539A8500399EA4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C28143B115539A8500399EA4 /* PA SlabType Demo */,
+				C28143D815539A8500399EA4 /* PA SlabType DemoTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C28143B015539A8500399EA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C28143C115539A8500399EA4 /* InfoPlist.strings in Resources */,
+				C28143CA15539A8500399EA4 /* MainStoryboard_iPhone.storyboard in Resources */,
+				C28143CD15539A8500399EA4 /* MainStoryboard_iPad.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C28143D615539A8500399EA4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C28143E515539A8500399EA4 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C28143D715539A8500399EA4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C28143AE15539A8500399EA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C28143C315539A8500399EA4 /* main.m in Sources */,
+				C28143C715539A8500399EA4 /* PAAppDelegate.m in Sources */,
+				C28143D015539A8500399EA4 /* PAMainViewController.m in Sources */,
+				C28143D315539A8500399EA4 /* PAFlipsideViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C28143D415539A8500399EA4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C28143E815539A8500399EA4 /* PA_SlabType_DemoTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C28143DF15539A8500399EA4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C28143B115539A8500399EA4 /* PA SlabType Demo */;
+			targetProxy = C28143DE15539A8500399EA4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		C28143BF15539A8500399EA4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C28143C015539A8500399EA4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		C28143C815539A8500399EA4 /* MainStoryboard_iPhone.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C28143C915539A8500399EA4 /* en */,
+			);
+			name = MainStoryboard_iPhone.storyboard;
+			sourceTree = "<group>";
+		};
+		C28143CB15539A8500399EA4 /* MainStoryboard_iPad.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C28143CC15539A8500399EA4 /* en */,
+			);
+			name = MainStoryboard_iPad.storyboard;
+			sourceTree = "<group>";
+		};
+		C28143E315539A8500399EA4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C28143E415539A8500399EA4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		C28143E915539A8500399EA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C28143EA15539A8500399EA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C28143EC15539A8500399EA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PA SlabType Demo/PA SlabType Demo-Prefix.pch";
+				INFOPLIST_FILE = "PA SlabType Demo/PA SlabType Demo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		C28143ED15539A8500399EA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PA SlabType Demo/PA SlabType Demo-Prefix.pch";
+				INFOPLIST_FILE = "PA SlabType Demo/PA SlabType Demo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		C28143EF15539A8500399EA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PA SlabType Demo.app/PA SlabType Demo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PA SlabType Demo/PA SlabType Demo-Prefix.pch";
+				INFOPLIST_FILE = "PA SlabType DemoTests/PA SlabType DemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		C28143F015539A8500399EA4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/PA SlabType Demo.app/PA SlabType Demo";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "PA SlabType Demo/PA SlabType Demo-Prefix.pch";
+				INFOPLIST_FILE = "PA SlabType DemoTests/PA SlabType DemoTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C28143AC15539A8500399EA4 /* Build configuration list for PBXProject "PA SlabType Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C28143E915539A8500399EA4 /* Debug */,
+				C28143EA15539A8500399EA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C28143EB15539A8500399EA4 /* Build configuration list for PBXNativeTarget "PA SlabType Demo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C28143EC15539A8500399EA4 /* Debug */,
+				C28143ED15539A8500399EA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		C28143EE15539A8500399EA4 /* Build configuration list for PBXNativeTarget "PA SlabType DemoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C28143EF15539A8500399EA4 /* Debug */,
+				C28143F015539A8500399EA4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C28143A915539A8500399EA4 /* Project object */;
+}
