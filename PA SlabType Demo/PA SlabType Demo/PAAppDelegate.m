@@ -10,11 +10,14 @@
 
 @implementation PAAppDelegate
 
-@synthesize window = _window;
+@synthesize window = _window, slab;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
+
+    slab = [[PASlabText alloc] initWithString:@"I WISH IT WAS THAT SIMPLE THAT I COULD ERASE MY PAST"];
+    [slab splitText];
+    
     return YES;
 }
 							
