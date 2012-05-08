@@ -37,6 +37,9 @@
     if (words == NULL) {
         words = [NSMutableArray arrayWithCapacity:0];
     }
+    if(!lines){
+        lines = [[NSMutableArray alloc] initWithCapacity:0];
+    }
 
     // segment the text into lines 
     words =  [sentence componentsSeparatedByString:@" "];
@@ -49,8 +52,9 @@
     NSMutableString *preText = [[NSMutableString alloc] initWithString:@""];
     NSMutableString *postText = [[NSMutableString alloc] initWithString:@""];
     NSMutableString *finalText = [[NSMutableString alloc] initWithString:@""];
-    lines = [[NSMutableArray alloc] initWithCapacity:0];
-    
+
+
+
     // while we still have words left, build the next line
     while( wordIndex < wc){
 
@@ -62,7 +66,12 @@
         // per line, while the length of the other is greater than that ideal
         while([postText length] < idealCharCountPerLine){
             [preText setString: postText];
-            [postText appendFormat:@"%@ ", [words objectAtIndex:wordIndex]];
+
+            if([postText length]){ //prepend a space
+                [postText appendFormat:@" %@", [words objectAtIndex:wordIndex]];
+            } else {
+                [postText setString:[words objectAtIndex:wordIndex]];
+            }
             wordIndex++;
             if (wordIndex >= wc){
                 break;
@@ -71,8 +80,9 @@
         
         // calculate the character difference between the two strings and the
         // ideal number of characters per line 
-        preDiff = idealCharCountPerLine - [preText length];
-        postDiff = [postText length] - idealCharCountPerLine;
+        // Added: Removed the extra whitespace that was present in the origian length calculations
+        preDiff = idealCharCountPerLine - ([preText length]-1);
+        postDiff = ([postText length]-1) - idealCharCountPerLine;
        // NSLog(@"[%d] %@(%d)(%d) : %@(%d)(%d)",idealCharCountPerLine, preText, [preText length], preDiff,postText, [postText length], postDiff);
         
         // if the smaller string is closer to the length of the ideal than
@@ -88,7 +98,7 @@
         }
 
         
-        [lines addObject: [NSString stringWithFormat:@"%@",[finalText substringToIndex:([finalText length]-1)]]];
+        [lines addObject: [NSString stringWithFormat:@"%@",finalText]];
 
     }
     NSLog(@"%@",lines);
