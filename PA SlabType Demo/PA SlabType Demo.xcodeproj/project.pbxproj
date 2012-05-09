@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C2058D461558AE9A00453269 /* PASlabText.m in Sources */ = {isa = PBXBuildFile; fileRef = C2058D451558AE9A00453269 /* PASlabText.m */; };
+		C26F24021559E57B008121FC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C26F24011559E57B008121FC /* CoreText.framework */; };
 		C28143B715539A8500399EA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143B615539A8500399EA4 /* UIKit.framework */; };
 		C28143B915539A8500399EA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143B815539A8500399EA4 /* Foundation.framework */; };
 		C28143BB15539A8500399EA4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143BA15539A8500399EA4 /* CoreGraphics.framework */; };
@@ -38,6 +39,7 @@
 /* Begin PBXFileReference section */
 		C2058D441558AE9A00453269 /* PASlabText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASlabText.h; path = ../PASlabType/PASlabText.h; sourceTree = "<group>"; };
 		C2058D451558AE9A00453269 /* PASlabText.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASlabText.m; path = ../PASlabType/PASlabText.m; sourceTree = "<group>"; };
+		C26F24011559E57B008121FC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		C28143B215539A8500399EA4 /* PA SlabType Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PA SlabType Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28143B615539A8500399EA4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		C28143B815539A8500399EA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -67,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C26F24021559E57B008121FC /* CoreText.framework in Frameworks */,
 				C28143B715539A8500399EA4 /* UIKit.framework in Frameworks */,
 				C28143B915539A8500399EA4 /* Foundation.framework in Frameworks */,
 				C28143BB15539A8500399EA4 /* CoreGraphics.framework in Frameworks */,
@@ -118,6 +121,7 @@
 		C28143B515539A8500399EA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C26F24011559E57B008121FC /* CoreText.framework */,
 				C28143B615539A8500399EA4 /* UIKit.framework */,
 				C28143B815539A8500399EA4 /* Foundation.framework */,
 				C28143BA15539A8500399EA4 /* CoreGraphics.framework */,
