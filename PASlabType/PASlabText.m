@@ -22,6 +22,11 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+
+        // Setting the dimensions of our drawing box
+        boxWidth = self.frame.size.width;
+        boxHeight = self.frame.size.height;
+        
         if(!fontChoices){
             fontChoices = [NSArray  arrayWithObjects:@"Arial",@"AmericanTypewriter", @"Arial-RoundedMTBold",@"Futura-Medium", @"HelveticaNeueu-Light", @"Verdana" , nil];
             color = [UIColor redColor];
@@ -43,12 +48,30 @@
  **/
 -(void) splitTextInString: (NSString *)string {
     sentence = string;
-    idealCharCountPerLine = 8;
     
     NSLog(@"This is the init: %@", sentence);
     
+    // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
+    idealLineLength = 12;
+    
+//    charAspectRatio = 0.44518217f; //on a per-font basis
+    charAspectRatio = 0.3749f;
+    idealLineAspectRatio = charAspectRatio * idealLineLength; // 0.44518217 * 12 = 5.4218604
+    
 
     
+    idealLineHeight = boxWidth / idealLineAspectRatio;
+    hypotheticalLineCount = floor(boxHeight / idealLineHeight);
+    
+    idealCharCountPerLine = (int)round([string length]/hypotheticalLineCount);
+
+    NSLog(@"idealLineLength: %d",idealLineLength);
+    NSLog(@"charAspectRatio: %f", charAspectRatio);
+    NSLog(@"idealLineAspectRatio: %f", idealLineAspectRatio);
+    NSLog(@"idealLineHeight: %f",idealLineHeight);
+    NSLog(@"hypotheticalLineCount: %d",hypotheticalLineCount);
+    NSLog(@"idealCharCountPerLine: %d",idealCharCountPerLine);
+
     if (words == NULL) {
         words = [NSMutableArray arrayWithCapacity:0];
     }
@@ -67,7 +90,6 @@
     NSMutableString *preText = [[NSMutableString alloc] initWithString:@""];
     NSMutableString *postText = [[NSMutableString alloc] initWithString:@""];
     NSMutableString *finalText = [[NSMutableString alloc] initWithString:@""];
-
 
 
     // while we still have words left, build the next line
@@ -117,6 +139,7 @@
 
     }
     NSLog(@"%@",lines);
+
     
 //    [self drawRect: CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
  
@@ -125,10 +148,11 @@
 
 }
 
+
 -(NSAttributedString*)attrStringFromMarkup: (NSString *)markup {
     NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:@""];
     
-    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], 24.0f, NULL);
+    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], 20.0f, NULL);
     
     NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                            (id) self.color.CGColor, kCTForegroundColorAttributeName,
@@ -138,6 +162,44 @@
                            nil];
     [aString appendAttributedString:[[NSAttributedString alloc] initWithString:markup attributes:attrs] ];
     return aString;
+}
+/**
+ Line-by-line format to fit within the given bounds
+ **/
+-(NSAttributedString *)formatLinesForLayout {
+    NSMutableAttributedString *finalString = [[NSMutableAttributedString alloc] initWithString:@""];
+//    NSMutableAttributedString *tmpString = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    int lc = [lines count];
+    float fontSize = 12.0f;    
+    float newFontSize = 12.0f;
+    for( int ii = 0; ii < lc; ii++){
+        NSString *line = [NSString stringWithFormat:@"%@\n",[lines objectAtIndex:ii]];
+        
+        // Get a line.
+        // Figure out how big the line is (width).
+        // Set the size accordingly
+        // Append to finalString
+
+        CGSize size = [line sizeWithFont:[UIFont fontWithName:[fontChoices objectAtIndex:1] size:fontSize]];
+        float scale = boxWidth/ size.width;
+        newFontSize = fontSize * scale;
+        CGSize newSize = [line sizeWithFont:[UIFont fontWithName:[fontChoices objectAtIndex:1] size:newFontSize]];
+        NSLog(@"%f - %f = %f", boxWidth, newSize.width, (boxWidth-newSize.width));
+        CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], newFontSize, NULL);
+        NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                               (id) self.color.CGColor, kCTForegroundColorAttributeName,
+                               (__bridge id) fontRef, kCTFontAttributeName,
+                               (id) self.strokeColor.CGColor, kCTStrokeColorAttributeName,
+                               (id) [NSNumber numberWithInt:self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
+                               nil];
+        NSAttributedString *tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
+        [finalString appendAttributedString:tmpString];
+
+    }
+    
+    
+    return finalString;
 }
 
 //NOTE : Cannot call drawRect directly
@@ -156,7 +218,9 @@
     
 //    NSAttributedString* attString = [[NSAttributedString alloc]
 //                                      initWithString:[lines componentsJoinedByString:@"\n"]] ;     
-    NSAttributedString *attString = [self attrStringFromMarkup:[lines componentsJoinedByString:@"\n"]];
+//    NSAttributedString *attString = [self attrStringFromMarkup:[lines componentsJoinedByString:@"\n"]];
+    NSAttributedString *attString = [self formatLinesForLayout];
+
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attString); //3
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
                              CFRangeMake(0, [attString length]), path, NULL);
