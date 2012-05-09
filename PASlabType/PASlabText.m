@@ -13,17 +13,25 @@
 @implementation PASlabText
 
 @synthesize charAspectRatio, idealLineLength, idealLineAspectRatio, boxWidth, boxHeight, idealLineHeight, hypotheticalLineCount, idealCharCountPerLine;
-@synthesize font, sentence, words, lines;
+@synthesize sentence, words, lines;
+@synthesize font, color, strokeColor, strokeWidth;
+@synthesize fontChoices;
 
--(id)initWithString:(NSString *)string {
-    self = [super init];
-    sentence = string;
-    idealCharCountPerLine = 8;
-    
-    NSLog(@"This is the init: %@", sentence);
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        // Initialization code
+        if(!fontChoices){
+            fontChoices = [NSArray  arrayWithObjects:@"Arial",@"AmericanTypewriter", @"Arial-RoundedMTBold",@"Futura-Medium", @"HelveticaNeueu-Light", @"Verdana" , nil];
+            color = [UIColor redColor];
+            strokeColor = [UIColor blueColor];
+            strokeWidth = 0.0f;
+            font = [NSString stringWithFormat:@"Arial"];
+        }
+    }
     return self;
 }
-
 
 /**
  This function is a stripped-down AS3 -> ObjC port of the slabtype
@@ -33,7 +41,14 @@
  [2] https://github.com/freqdec/slabText
 
  **/
--(void) splitText{
+-(void) splitTextInString: (NSString *)string {
+    sentence = string;
+    idealCharCountPerLine = 8;
+    
+    NSLog(@"This is the init: %@", sentence);
+    
+
+    
     if (words == NULL) {
         words = [NSMutableArray arrayWithCapacity:0];
     }
@@ -103,6 +118,60 @@
     }
     NSLog(@"%@",lines);
     
+//    [self drawRect: CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
+ 
+    [self setOpaque:YES];
+    [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]];
+
 }
 
+-(NSAttributedString*)attrStringFromMarkup: (NSString *)markup {
+    NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:@""];
+    
+    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], 24.0f, NULL);
+    
+    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                           (id) self.color.CGColor, kCTForegroundColorAttributeName,
+                           (__bridge id) fontRef, kCTFontAttributeName,
+                           (id) self.strokeColor.CGColor, kCTStrokeColorAttributeName,
+                           (id) [NSNumber numberWithInt:self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
+                           nil];
+    [aString appendAttributedString:[[NSAttributedString alloc] initWithString:markup attributes:attrs] ];
+    return aString;
+}
+
+//NOTE : Cannot call drawRect directly
+- (void)drawRect:(CGRect)rect
+{
+    [super drawRect:rect];
+
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    // Flip the coordinate system
+    CGContextSetTextMatrix(context, CGAffineTransformIdentity);
+    CGContextTranslateCTM(context, 0, self.bounds.size.height);
+    CGContextScaleCTM(context, 1.0, -1.0);
+    
+    CGMutablePathRef path = CGPathCreateMutable(); //1
+    CGPathAddRect(path, NULL, self.bounds );
+    
+//    NSAttributedString* attString = [[NSAttributedString alloc]
+//                                      initWithString:[lines componentsJoinedByString:@"\n"]] ;     
+    NSAttributedString *attString = [self attrStringFromMarkup:[lines componentsJoinedByString:@"\n"]];
+    CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attString); //3
+    CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
+                             CFRangeMake(0, [attString length]), path, NULL);
+    
+    CTFrameDraw(frame, context); //4
+    
+    CFRelease(frame); //5
+    CFRelease(path);
+    CFRelease(framesetter);
+}
+
+
+
+
 @end
+
+
+

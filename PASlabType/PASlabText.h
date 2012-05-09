@@ -6,29 +6,36 @@
 //  Copyright (c) 2012 Pivotal Action, Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import <CoreText/CoreText.h>
 
-@interface PASlabText : NSObject
+@interface PASlabText : UIView
 
 
-@property float charAspectRatio;                // 0.44518217
-@property int idealLineLength;                  // 12
-@property float idealLineAspectRatio;           // charAspectRatio * idealLineLength = 0.44518217 * 12 = 54 
+@property (readwrite, assign) float charAspectRatio;                // 0.44518217
+@property (readwrite, assign) int idealLineLength;                  // 12
+@property (readwrite, assign) float idealLineAspectRatio;           // charAspectRatio * idealLineLength = 0.44518217 * 12 = 54 
 
-@property int boxWidth;                         // 150px
-@property int boxHeight;                        // 200px
+@property (readwrite, assign) int boxWidth;                         // 150px
+@property (readwrite, assign) int boxHeight;                        // 200px
 
-@property float idealLineHeight;                // boxWidth / idealLineAspectRatio = 150/5.4218604 = 27.665781
-@property int hypotheticalLineCount;            // boxWidth / idealLineHeight = 200/27.665781 = floor(7.2291471) = 7
-@property int idealCharCountPerLine;            // charCount / hypotheticalLineCount = 54/7 = round(7.7142857) = 8
-
-@property (nonatomic, retain) NSObject *font;
+@property (readwrite, assign) float idealLineHeight;                // boxWidth / idealLineAspectRatio = 150/5.4218604 = 27.665781
+@property (readwrite, assign) int hypotheticalLineCount;            // boxWidth / idealLineHeight = 200/27.665781 = floor(7.2291471) = 7
+@property (readwrite, assign) int idealCharCountPerLine;            // charCount / hypotheticalLineCount = 54/7 = round(7.7142857) = 8
 
 @property (nonatomic, retain) NSString *sentence;
 @property (nonatomic, retain) NSArray *words;
 @property (nonatomic, retain) NSMutableArray *lines;
 
--(id)initWithString:(NSString *)string;
--(void)splitText;
+
+@property (nonatomic, retain) NSString *font;
+@property (nonatomic, retain) UIColor *color;
+@property (nonatomic, retain) UIColor *strokeColor;
+@property (readwrite, assign) float strokeWidth;
+
+@property (nonatomic, retain) NSArray *fontChoices;
+
+-(void)splitTextInString: (NSString *)string;
+-(NSAttributedString*)attrStringFromMarkup: (NSString *)markup;
 
 @end
