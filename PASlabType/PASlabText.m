@@ -149,58 +149,59 @@
 }
 
 
--(NSAttributedString*)attrStringFromMarkup: (NSString *)markup {
-    NSMutableAttributedString *aString = [[NSMutableAttributedString alloc] initWithString:@""];
-    
-    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], 20.0f, NULL);
-    
-    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                           (id) self.color.CGColor, kCTForegroundColorAttributeName,
-                           (__bridge id) fontRef, kCTFontAttributeName,
-                           (id) self.strokeColor.CGColor, kCTStrokeColorAttributeName,
-                           (id) [NSNumber numberWithInt:self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
-                           nil];
-    [aString appendAttributedString:[[NSAttributedString alloc] initWithString:markup attributes:attrs] ];
-    return aString;
-}
 /**
  Line-by-line format to fit within the given bounds
  **/
 -(NSAttributedString *)formatLinesForLayout {
     NSMutableAttributedString *finalString = [[NSMutableAttributedString alloc] initWithString:@""];
-//    NSMutableAttributedString *tmpString = [[NSMutableAttributedString alloc] initWithString:@""];
     
     int lc = [lines count];
-    float fontSize = 12.0f;    
-    float newFontSize = 12.0f;
+
     for( int ii = 0; ii < lc; ii++){
         NSString *line = [NSString stringWithFormat:@"%@\n",[lines objectAtIndex:ii]];
         
-        // Get a line.
-        // Figure out how big the line is (width).
-        // Set the size accordingly
-        // Append to finalString
-
-        CGSize size = [line sizeWithFont:[UIFont fontWithName:[fontChoices objectAtIndex:1] size:fontSize]];
-        float scale = boxWidth/ size.width;
-        newFontSize = fontSize * scale;
-        CGSize newSize = [line sizeWithFont:[UIFont fontWithName:[fontChoices objectAtIndex:1] size:newFontSize]];
-        NSLog(@"%f - %f = %f", boxWidth, newSize.width, (boxWidth-newSize.width));
-        CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], newFontSize, NULL);
-        NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
-                               (id) self.color.CGColor, kCTForegroundColorAttributeName,
-                               (__bridge id) fontRef, kCTFontAttributeName,
-                               (id) self.strokeColor.CGColor, kCTStrokeColorAttributeName,
-                               (id) [NSNumber numberWithInt:self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
-                               nil];
-        NSAttributedString *tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
-        [finalString appendAttributedString:tmpString];
+        [finalString appendAttributedString:[self sizeLineToFit:line]];
 
     }
     
     
     return finalString;
 }
+
+-(NSAttributedString *)sizeLineToFit:(NSString *)line {
+    float scale = 1.0f;
+    float fontSize = 12.0f;    
+
+    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], (fontSize * scale), NULL);
+    NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+                           (id) self.color.CGColor, kCTForegroundColorAttributeName,
+                           (__bridge id) fontRef, kCTFontAttributeName,
+                           (id) self.strokeColor.CGColor, kCTStrokeColorAttributeName,
+                           (id) [NSNumber numberWithInt:self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
+                           nil];
+    NSAttributedString *tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
+    CTLineRef lineRef = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef) tmpString);
+    
+    CGFloat ascent;
+    CGFloat descent;
+    CGFloat lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
+    float whitespace = CTLineGetTrailingWhitespaceWidth(lineRef);
+    float realTextWidth = lineWidth - whitespace;
+    scale = self.frame.size.width / realTextWidth;
+    
+    fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], (fontSize * scale), NULL);
+    attrs = [NSDictionary dictionaryWithObjectsAndKeys:
+             (id) self.color.CGColor, kCTForegroundColorAttributeName,
+             (__bridge id) fontRef, kCTFontAttributeName,
+             (id) self.strokeColor.CGColor, kCTStrokeColorAttributeName,
+             (id) [NSNumber numberWithInt:self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
+             nil];
+    
+    tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
+    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
+    return tmpString;
+}
+
 
 //NOTE : Cannot call drawRect directly
 - (void)drawRect:(CGRect)rect
@@ -216,9 +217,6 @@
     CGMutablePathRef path = CGPathCreateMutable(); //1
     CGPathAddRect(path, NULL, self.bounds );
     
-//    NSAttributedString* attString = [[NSAttributedString alloc]
-//                                      initWithString:[lines componentsJoinedByString:@"\n"]] ;     
-//    NSAttributedString *attString = [self attrStringFromMarkup:[lines componentsJoinedByString:@"\n"]];
     NSAttributedString *attString = [self formatLinesForLayout];
 
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attString); //3

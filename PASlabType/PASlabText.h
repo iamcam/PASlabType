@@ -36,7 +36,7 @@
 @property (nonatomic, retain) NSArray *fontChoices;
 
 -(void)splitTextInString: (NSString *)string;
--(NSAttributedString*)attrStringFromMarkup: (NSString *)markup; //TODO: This isn't going to stay
 -(NSAttributedString *)formatLinesForLayout;
+-(NSAttributedString *)sizeLineToFit:(NSString *)line;
 
 @end
