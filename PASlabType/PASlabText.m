@@ -23,12 +23,14 @@
     if (self) {
         // Initialization code
 
+        
         // Setting the dimensions of our drawing box
         boxWidth = self.frame.size.width;
         boxHeight = self.frame.size.height;
         
         if(!fontChoices){
-            fontChoices = [NSArray  arrayWithObjects:@"Arial",@"AmericanTypewriter", @"Arial-RoundedMTBold",@"Futura-Medium", @"HelveticaNeueu-Light", @"Verdana" , nil];
+            //@"Raleway Thin" is the only one that doesn't work right now
+            fontChoices = [NSArray  arrayWithObjects:@"Arial",@"League Gothic",@"Ostrich Sans Rounded",@"League Script Thin",@"Ostrich Sans Black",@"Ostrich Sans Bold",@"ChunkFive",@"AmericanTypewriter", nil];
             color = [UIColor redColor];
             strokeColor = [UIColor blueColor];
             strokeWidth = 0.0f;
@@ -37,6 +39,7 @@
     }
     return self;
 }
+
 
 /**
  This function is a stripped-down AS3 -> ObjC port of the slabtype
@@ -54,8 +57,10 @@
     // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
     idealLineLength = 12;
     
-//    charAspectRatio = 0.44518217f; //on a per-font basis
+    charAspectRatio = 0.44518217f; //on a per-font basis
     charAspectRatio = 0.3749f;
+    charAspectRatio = 0.324324324f; //League Gothic
+    
     idealLineAspectRatio = charAspectRatio * idealLineLength; // 0.44518217 * 12 = 5.4218604
     
 
