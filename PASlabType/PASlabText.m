@@ -27,11 +27,14 @@
         // Setting the dimensions of our drawing box
         boxWidth = self.frame.size.width;
         boxHeight = self.frame.size.height;
+        [self setOpaque:NO];
+        [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0]];
         
+
         if(!fontChoices){
             //@"Raleway Thin" is the only one that doesn't work right now
             fontChoices = [NSArray  arrayWithObjects:@"Arial",@"League Gothic",@"Ostrich Sans Rounded",@"League Script Thin",@"Ostrich Sans Black",@"Ostrich Sans Bold",@"ChunkFive",@"AmericanTypewriter", nil];
-            color = [UIColor redColor];
+            color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
             strokeColor = [UIColor blueColor];
             strokeWidth = 0.0f;
             font = [NSString stringWithFormat:@"Arial"];
@@ -60,7 +63,6 @@
     charAspectRatio = 0.44518217f; //on a per-font basis
     charAspectRatio = 0.3749f;
     charAspectRatio = 0.324324324f; //League Gothic
-    
     idealLineAspectRatio = charAspectRatio * idealLineLength; // 0.44518217 * 12 = 5.4218604
     
 
@@ -148,9 +150,6 @@
     
 //    [self drawRect: CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
  
-    [self setOpaque:YES];
-    [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:1.0f]];
-
 }
 
 
@@ -190,9 +189,27 @@
     CGFloat ascent;
     CGFloat descent;
     CGFloat lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
+    
     float whitespace = CTLineGetTrailingWhitespaceWidth(lineRef);
     float realTextWidth = lineWidth - whitespace;
     scale = self.frame.size.width / realTextWidth;
+
+    // http://stackoverflow.com/questions/5312962/line-spacing-and-paragraph-alignment-in-coretext/6056018#6056018
+    float spaceBetweenParaghraphs = 0.0f;
+    float topSpacing = 0.0f;
+    float spaceBetweenLines = 0.0;
+    float minLineHeight = ascent * scale; //helps us get real tight
+    float maxLineHeight = ascent * scale; //helps us get real tight
+    CTParagraphStyleSetting theSettings[5] = 
+    {
+        { kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &spaceBetweenParaghraphs },
+        { kCTParagraphStyleSpecifierParagraphSpacingBefore, sizeof(CGFloat), &topSpacing },
+        { kCTParagraphStyleSpecifierLineSpacing, sizeof(CGFloat), &spaceBetweenLines },
+        { kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &minLineHeight},
+        { kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
+    };
+    
+    CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(theSettings, 5);
     
     fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], (fontSize * scale), NULL);
     attrs = [NSDictionary dictionaryWithObjectsAndKeys:
@@ -200,9 +217,11 @@
              (__bridge id) fontRef, kCTFontAttributeName,
              (id) self.strokeColor.CGColor, kCTStrokeColorAttributeName,
              (id) [NSNumber numberWithInt:self.strokeWidth], (NSString *)kCTStrokeWidthAttributeName,
+             (__bridge id) paragraphStyle, kCTParagraphStyleAttributeName,
              nil];
-    
+
     tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
+
     NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
     return tmpString;
 }
@@ -216,7 +235,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     // Flip the coordinate system
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    CGContextTranslateCTM(context, 0, self.bounds.size.height);
+    CGContextTranslateCTM(context, 0, self.bounds.size.height + 15.0);
     CGContextScaleCTM(context, 1.0, -1.0);
     
     CGMutablePathRef path = CGPathCreateMutable(); //1
