@@ -19,6 +19,7 @@
 		C2615DEC155B3CE2009C8367 /* Ostrich Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2615DE1155B3CE2009C8367 /* Ostrich Regular.ttf */; };
 		C2615DED155B3CE2009C8367 /* Ostrich Rounded.ttf in Resources */ = {isa = PBXBuildFile; fileRef = C2615DE2155B3CE2009C8367 /* Ostrich Rounded.ttf */; };
 		C2615DEE155B3CE2009C8367 /* Raleway Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C2615DE3155B3CE2009C8367 /* Raleway Thin.otf */; };
+		C2615DF0155B3DF9009C8367 /* readme.markdown in Resources */ = {isa = PBXBuildFile; fileRef = C2615DEF155B3DF9009C8367 /* readme.markdown */; };
 		C26F24021559E57B008121FC /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C26F24011559E57B008121FC /* CoreText.framework */; };
 		C28143B715539A8500399EA4 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143B615539A8500399EA4 /* UIKit.framework */; };
 		C28143B915539A8500399EA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C28143B815539A8500399EA4 /* Foundation.framework */; };
@@ -61,6 +62,7 @@
 		C2615DE1155B3CE2009C8367 /* Ostrich Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Ostrich Regular.ttf"; path = "../Fonts/Ostrich Regular.ttf"; sourceTree = "<group>"; };
 		C2615DE2155B3CE2009C8367 /* Ostrich Rounded.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Ostrich Rounded.ttf"; path = "../Fonts/Ostrich Rounded.ttf"; sourceTree = "<group>"; };
 		C2615DE3155B3CE2009C8367 /* Raleway Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway Thin.otf"; path = "../Fonts/Raleway Thin.otf"; sourceTree = "<group>"; };
+		C2615DEF155B3DF9009C8367 /* readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.markdown; path = ../Fonts/readme.markdown; sourceTree = "<group>"; };
 		C26F24011559E57B008121FC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		C28143B215539A8500399EA4 /* PA SlabType Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PA SlabType Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C28143B615539A8500399EA4 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -123,10 +125,11 @@
 		C2615DD7155B3CCB009C8367 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				C2615DEF155B3DF9009C8367 /* readme.markdown */,
+				C2615DDC155B3CE2009C8367 /* Open Font License.markdown */,
 				C2615DD9155B3CE2009C8367 /* Chunk.otf */,
 				C2615DDA155B3CE2009C8367 /* League Gothic.otf */,
 				C2615DDB155B3CE2009C8367 /* LeagueScriptNumberOne.otf */,
-				C2615DDC155B3CE2009C8367 /* Open Font License.markdown */,
 				C2615DDD155B3CE2009C8367 /* Ostrich Black.ttf */,
 				C2615DDE155B3CE2009C8367 /* Ostrich Bold.ttf */,
 				C2615DDF155B3CE2009C8367 /* Ostrich Dashed.ttf */,
@@ -302,6 +305,7 @@
 				C2615DEC155B3CE2009C8367 /* Ostrich Regular.ttf in Resources */,
 				C2615DED155B3CE2009C8367 /* Ostrich Rounded.ttf in Resources */,
 				C2615DEE155B3CE2009C8367 /* Raleway Thin.otf in Resources */,
+				C2615DF0155B3DF9009C8367 /* readme.markdown in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

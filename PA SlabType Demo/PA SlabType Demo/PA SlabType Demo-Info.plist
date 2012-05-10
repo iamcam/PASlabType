@@ -47,5 +47,18 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIAppFonts</key>
+	<array>
+		<string>League Gothic.otf</string>
+		<string>Chunk.otf</string>
+		<string>Ostrich Rounded.ttf</string>
+		<string>Ostrich Black.ttf</string>
+		<string>Ostrich Bold.ttf</string>
+		<string>Ostrich Dashed.ttf</string>
+		<string>Ostrich Light.ttf</string>
+		<string>Ostrich Regular.ttf</string>
+		<string>Raleway Thin.otf</string>
+		<string>LeagueScriptNumberOne.otf</string>
+	</array>
 </dict>
 </plist>
