@@ -32,8 +32,7 @@
         
 
         if(!fontChoices){
-            //@"Raleway Thin" is the only one that doesn't work right now
-            fontChoices = [NSArray  arrayWithObjects:@"Arial",@"League Gothic",@"Ostrich Sans Rounded",@"League Script Thin",@"Ostrich Sans Black",@"Ostrich Sans Bold",@"ChunkFive",@"AmericanTypewriter", nil];
+            fontChoices = [NSArray  arrayWithObjects:@"Arial",@"League Gothic",@"Raleway-Thin",@"Ostrich Sans Rounded",@"League Script Thin",@"Ostrich Sans Black",@"Ostrich Sans Bold",@"ChunkFive",@"AmericanTypewriter", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
             strokeColor = [UIColor blueColor];
             strokeWidth = 0.0f;
