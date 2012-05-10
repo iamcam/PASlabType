@@ -28,11 +28,11 @@
         boxWidth = self.frame.size.width;
         boxHeight = self.frame.size.height;
         [self setOpaque:NO];
-        [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.0]];
+        [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.15]];
         
 
         if(!fontChoices){
-            fontChoices = [NSArray  arrayWithObjects:@"Arial",@"League Gothic",@"Raleway-Thin",@"Ostrich Sans Rounded",@"League Script Thin",@"Ostrich Sans Black",@"Ostrich Sans Bold",@"ChunkFive",@"AmericanTypewriter", nil];
+            fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",@"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"Ostrich Sans Black",@"Ostrich Sans Bold",@"ChunkFive",@"AmericanTypewriter", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
             strokeColor = [UIColor blueColor];
             strokeWidth = 0.0f;
@@ -58,9 +58,9 @@
     
     // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
     idealLineLength = 12;
-    
-    charAspectRatio = 0.44518217f; //on a per-font basis
-    charAspectRatio = 0.3749f;
+//    charAspectRatio = 0.5;
+//    charAspectRatio = 0.44518217f; //on a per-font basis
+//    charAspectRatio = 0.3749f;
     charAspectRatio = 0.324324324f; //League Gothic
     idealLineAspectRatio = charAspectRatio * idealLineLength; // 0.44518217 * 12 = 5.4218604
     
@@ -192,13 +192,15 @@
     float whitespace = CTLineGetTrailingWhitespaceWidth(lineRef);
     float realTextWidth = lineWidth - whitespace;
     scale = self.frame.size.width / realTextWidth;
-
+    
     // http://stackoverflow.com/questions/5312962/line-spacing-and-paragraph-alignment-in-coretext/6056018#6056018
     float spaceBetweenParaghraphs = 0.0f;
     float topSpacing = 0.0f;
     float spaceBetweenLines = 0.0;
     float minLineHeight = ascent * scale; //helps us get real tight
     float maxLineHeight = ascent * scale; //helps us get real tight
+
+    
     CTParagraphStyleSetting theSettings[5] = 
     {
         { kCTParagraphStyleSpecifierParagraphSpacing, sizeof(CGFloat), &spaceBetweenParaghraphs },
@@ -207,7 +209,9 @@
         { kCTParagraphStyleSpecifierMinimumLineHeight, sizeof(CGFloat), &minLineHeight},
         { kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
     };
-    
+    /**
+     Touching 
+     **/
     CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(theSettings, 5);
     
     fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], (fontSize * scale), NULL);
@@ -220,8 +224,10 @@
              nil];
 
     tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
+    lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
 
-    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
+//    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
+    NSLog(@"scale: %f\tfont size: %f\tascent: %f\tdescent: %f\tascent*scale: %f\t descent*scale: %f",scale,(fontSize * scale), ascent, descent, (ascent * scale), (descent*scale));
     return tmpString;
 }
 
