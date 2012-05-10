@@ -42,7 +42,7 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 300)];
+    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
     [slab splitTextInString:@"I WISH IT WAS THAT SIMPLE THAT I COULD ERASE MY PAST"];
 
     [self.view addSubview:slab];
