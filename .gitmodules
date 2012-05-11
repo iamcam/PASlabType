@@ -1,0 +1,15 @@
+[submodule "Fonts/League Gothic"]
+	path = Fonts/League Gothic
+	url = https://github.com/theleagueof/league-gothic.git
+[submodule "Fonts/Chunk"]
+	path = Fonts/Chunk
+	url = https://github.com/theleagueof/chunk.git
+[submodule "Fonts/Raleway"]
+	path = Fonts/Raleway
+	url = https://github.com/theleagueof/raleway.git
+[submodule "Fonts/Ostrich Sans"]
+	path = Fonts/Ostrich Sans
+	url = https://github.com/theleagueof/ostrich-sans.git
+[submodule "Fonts/League Script Number One"]
+	path = Fonts/League Script Number One
+	url = https://github.com/theleagueof/league-script-number-one.git
