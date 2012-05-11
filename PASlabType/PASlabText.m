@@ -32,7 +32,8 @@
         
 
         if(!fontChoices){
-            fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",@"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"Ostrich Sans Black",@"Ostrich Sans Bold",@"ChunkFive",@"AmericanTypewriter", nil];
+            //Optional choices: @"Ostrich Sans Black",@"Ostrich Sans Bold"
+            fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",@"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
             strokeColor = [UIColor blueColor];
             strokeWidth = 0.0f;
