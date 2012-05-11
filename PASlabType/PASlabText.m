@@ -16,6 +16,7 @@
 @synthesize sentence, words, lines;
 @synthesize font, color, strokeColor, strokeWidth;
 @synthesize fontChoices;
+@synthesize manualCharCountPerLine; // TODO: probably won't stay
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -75,7 +76,10 @@
     idealCharCountPerLine = (int)round([string length]/hypotheticalLineCount);
     if(idealCharCountPerLine == 0)
         idealCharCountPerLine = 1;
-//    idealCharCountPerLine = 16;
+
+    if(manualCharCountPerLine > 0){
+        idealCharCountPerLine = manualCharCountPerLine;
+    }
 
     NSLog(@"idealLineLength: %d",idealLineLength);
     NSLog(@"charAspectRatio: %f", charAspectRatio);

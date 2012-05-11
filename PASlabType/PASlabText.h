@@ -23,6 +23,8 @@
 @property (readwrite, assign) int hypotheticalLineCount;            // boxWidth / idealLineHeight = 200/27.665781 = floor(7.2291471) = 7
 @property (readwrite, assign) int idealCharCountPerLine;            // charCount / hypotheticalLineCount = 54/7 = round(7.7142857) = 8
 
+@property (readwrite, assign) int manualCharCountPerLine;
+
 @property (nonatomic, retain) NSString *sentence;
 @property (nonatomic, retain) NSArray *words;
 @property (nonatomic, retain) NSMutableArray *lines;
