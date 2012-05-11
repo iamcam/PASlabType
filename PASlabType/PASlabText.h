@@ -38,5 +38,5 @@
 -(void)splitTextInString: (NSString *)string;
 -(NSAttributedString *)formatLinesForLayout;
 -(NSAttributedString *)sizeLineToFit:(NSString *)line;
-
+-(void) clearText;
 @end

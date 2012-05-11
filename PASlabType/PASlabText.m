@@ -240,6 +240,11 @@
     return tmpString;
 }
 
+-(void)clearText {
+    words = nil;
+    words = [NSArray array];
+    [lines removeAllObjects];
+}
 
 //NOTE : Cannot call drawRect directly
 - (void)drawRect:(CGRect)rect
