@@ -53,13 +53,13 @@
 
  **/
 -(void) splitTextInString: (NSString *)string {
-    sentence = string;
+    sentence = [string stringByReplacingOccurrencesOfString:@"\n" withString:@"\n "];
     
     NSLog(@"This is the init: %@", sentence);
     
     // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
-    idealLineLength = 12;
-//    charAspectRatio = 0.5;
+    idealLineLength = 10;
+    charAspectRatio = 0.5;
 //    charAspectRatio = 0.44518217f; //on a per-font basis
 //    charAspectRatio = 0.3749f;
     charAspectRatio = 0.324324324f; //League Gothic
@@ -69,8 +69,13 @@
     
     idealLineHeight = boxWidth / idealLineAspectRatio;
     hypotheticalLineCount = floor(boxHeight / idealLineHeight);
+    if( hypotheticalLineCount == 0 ) hypotheticalLineCount = 1;
     
+    // TODO: will figuring out how many lines we really have do anything to change?
     idealCharCountPerLine = (int)round([string length]/hypotheticalLineCount);
+    if(idealCharCountPerLine == 0)
+        idealCharCountPerLine = 1;
+//    idealCharCountPerLine = 16;
 
     NSLog(@"idealLineLength: %d",idealLineLength);
     NSLog(@"charAspectRatio: %f", charAspectRatio);
@@ -97,11 +102,11 @@
     NSMutableString *preText = [[NSMutableString alloc] initWithString:@""];
     NSMutableString *postText = [[NSMutableString alloc] initWithString:@""];
     NSMutableString *finalText = [[NSMutableString alloc] initWithString:@""];
-
-
+    NSRange range;
+    
     // while we still have words left, build the next line
     while( wordIndex < wc){
-
+        NSLog(@"wordIndex: %d\twc: %d\t ptlen:%d\tidealCharCount:%d",wordIndex, wc, [postText length], idealCharCountPerLine);
         [postText setString:@""];
         
         // build two strings (preText and postText) word by word, with one
@@ -110,45 +115,48 @@
         // per line, while the length of the other is greater than that ideal
         while([postText length] < idealCharCountPerLine){
             [preText setString: postText];
-
+            
             if([postText length]){ //prepend a space
                 [postText appendFormat:@" %@", [words objectAtIndex:wordIndex]];
             } else {
                 [postText setString:[words objectAtIndex:wordIndex]];
             }
             wordIndex++;
-            if (wordIndex >= wc){
+
+            range = [postText rangeOfString:@"\n" options:NSBackwardsSearch];
+            NSLog(@"wordIndex: %d\twc: %d",wordIndex, wc);
+            if (wordIndex >= wc || range.length > 0){
                 break;
             }
         }
         
-        // calculate the character difference between the two strings and the
-        // ideal number of characters per line 
-        // Added: Removed the extra whitespace that was present in the origian length calculations
-        preDiff = idealCharCountPerLine - ([preText length]-1);
-        postDiff = ([postText length]-1) - idealCharCountPerLine;
-       // NSLog(@"[%d] %@(%d)(%d) : %@(%d)(%d)",idealCharCountPerLine, preText, [preText length], preDiff,postText, [postText length], postDiff);
-        
-        // if the smaller string is closer to the length of the ideal than
-        // the longer string, and doesn’t contain just a single space, then
-        // use that one for the line 
-        if( (preDiff < postDiff) && ([preText length] > 2)){
-            [finalText setString:preText];
-            wordIndex--;
-
-        // otherwise, use the longer string for the line
+        if(range.length){
+            [finalText setString:[postText stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
         } else {
-            [finalText setString:postText];
+            // calculate the character difference between the two strings and the
+            // ideal number of characters per line 
+            // Added: Removed the extra whitespace that was present in the origian length calculations
+            preDiff = idealCharCountPerLine - ([preText length]-1);
+            postDiff = ([postText length]-1) - idealCharCountPerLine;
+            
+            // if the smaller string is closer to the length of the ideal than
+            // the longer string, and doesn’t contain just a single space, then
+            // use that one for the line 
+            if( (preDiff < postDiff) && ([preText length] > 2)){
+                [finalText setString:preText];
+                wordIndex--;
+
+            // otherwise, use the longer string for the line
+            } else {
+                [finalText setString:postText];
+            }
         }
 
         
         [lines addObject: [NSString stringWithFormat:@"%@",finalText]];
 
     }
-    NSLog(@"%@",lines);
-
-    
-//    [self drawRect: CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, self.frame.size.height)];
+    NSLog(@"%@",lines);    
  
 }
 
