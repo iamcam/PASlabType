@@ -11,7 +11,7 @@
 @implementation PAMainViewController
 
 @synthesize flipsidePopoverController = _flipsidePopoverController;
-@synthesize slab;
+@synthesize slab, textInput;
 
 - (void)didReceiveMemoryWarning
 {
@@ -56,8 +56,13 @@
     [string setString:@"Passion leads"];
     [string setString:@"\"Debt robs you of your options.\""];
     [string setString:@"Violence might be verbal violence the cos put on the women"];
+//    [slab splitTextInString:@""];//WAS THAT SIMPLE THAT I COULD ERASE MY PAST"];
+    [string setString:@"I WISH IT WAS THAT SIMPLE\nTHAT I COULD ERASE MY PAST"];
+
     [slab splitTextInString:string];
+    [textInput setText:[slab sentence]];
     [self.view addSubview:slab];
+    [textInput becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -79,6 +84,15 @@
         return YES;
     }
 }
+
+#pragma mark - textInput delegates
+
+- (void)textViewDidChange:(UITextView *)textView {
+    [slab clearText];
+    [slab splitTextInString: [[textView text] uppercaseString]];
+    [slab setNeedsDisplay];
+}
+
 
 #pragma mark - Flipside View Controller
 

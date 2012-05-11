@@ -9,9 +9,10 @@
 #import "PAFlipsideViewController.h"
 #import "PASlabText.h"
 
-@interface PAMainViewController : UIViewController <PAFlipsideViewControllerDelegate, UIPopoverControllerDelegate>
+@interface PAMainViewController : UIViewController <PAFlipsideViewControllerDelegate, UIPopoverControllerDelegate, UITextViewDelegate>
 
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 @property (nonatomic, retain) PASlabText *slab;
+@property (nonatomic, retain) IBOutlet UITextView *textInput;
 
 @end
