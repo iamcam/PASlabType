@@ -37,31 +37,37 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    // TODO: We can hide the text field here.
+    [textInput setHidden:NO];
+
+    if(!slab){
+        //    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
+        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
+    }
+    NSMutableString *string = [NSMutableString string];
+    //    [string setString:@"Happy Mothers Day! That's right, I care abou nmy mom so much I start Tweeting to her early."];
+    //    [string setString:@"\"Narnia, Narnia, Narnia, awake. Love. Think. Speak. Be walking trees. Be talking beasts. Be divine waters.\""];
+    //    [string setString:@"Dogs in the office"];
+    //    [string setString:@" I might push towards poke for dinner tonight"];
+    //    [string setString:@"Another day, another iOS surprise"];
+    //    [string setString:@"Stop Selling & Start Telling"];
+    //    [string setString:@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example"];
+    //    [string setString:@"Passion leads"];
+    //    [string setString:@"\"Debt robs you of your options.\""];
+    //    [string setString:@"Violence might be verbal violence the cos put on the women"];
+    //    [string setString:@"I WISH IT WAS THAT SIMPLE\nTHAT I COULD ERASE MY PAST"];
+    
+    [string setString:@""]; 
+    [slab splitTextInString:string];
+    [textInput setText:[slab sentence]];
+    [self.view addSubview:slab];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    
-//    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
-    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
-    NSMutableString *string = [NSMutableString string];
-    [string setString:@"Happy Mothers Day! That's right, I care abou nmy mom so much I start Tweeting to her early."];
-    [string setString:@"\"Narnia, Narnia, Narnia, awake. Love. Think. Speak. Be walking trees. Be talking beasts. Be divine waters.\""];
-    [string setString:@"Dogs in the office"];
-    [string setString:@" I might push towards poke for dinner tonight"];
-    [string setString:@"Another day, another iOS surprise"];
-    [string setString:@"Stop Selling & Start Telling"];
-    [string setString:@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example"];
-    [string setString:@"Passion leads"];
-    [string setString:@"\"Debt robs you of your options.\""];
-    [string setString:@"Violence might be verbal violence the cos put on the women"];
-//    [slab splitTextInString:@""];//WAS THAT SIMPLE THAT I COULD ERASE MY PAST"];
-    [string setString:@"I WISH IT WAS THAT SIMPLE\nTHAT I COULD ERASE MY PAST"];
-
-    [slab splitTextInString:string];
-    [textInput setText:[slab sentence]];
-    [self.view addSubview:slab];
     [textInput becomeFirstResponder];
 }
 
