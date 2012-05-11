@@ -42,11 +42,22 @@
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
-    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
-    [slab splitTextInString:@"I WISH IT WAS THAT SIMPLE THAT I COULD ERASE MY PAST"];
-
-    [self.view addSubview:slab];
     
+//    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
+    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
+    NSMutableString *string = [NSMutableString string];
+    [string setString:@"Happy Mothers Day! That's right, I care abou nmy mom so much I start Tweeting to her early."];
+    [string setString:@"\"Narnia, Narnia, Narnia, awake. Love. Think. Speak. Be walking trees. Be talking beasts. Be divine waters.\""];
+    [string setString:@"Dogs in the office"];
+    [string setString:@" I might push towards poke for dinner tonight"];
+    [string setString:@"Another day, another iOS surprise"];
+    [string setString:@"Stop Selling & Start Telling"];
+    [string setString:@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example"];
+    [string setString:@"Passion leads"];
+    [string setString:@"\"Debt robs you of your options.\""];
+    [string setString:@"Violence might be verbal violence the cos put on the women"];
+    [slab splitTextInString:string];
+    [self.view addSubview:slab];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
