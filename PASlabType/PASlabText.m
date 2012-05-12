@@ -55,15 +55,14 @@
  **/
 -(void) splitTextInString: (NSString *)string {
     sentence = [string stringByReplacingOccurrencesOfString:@"\n" withString:@"\n "];
-    
+    boxWidth = self.frame.size.width;
+    boxHeight = self.frame.size.height;
     NSLog(@"This is the init: %@", sentence);
     
     // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
-    idealLineLength = 10;
-    charAspectRatio = 0.5;
-//    charAspectRatio = 0.44518217f; //on a per-font basis
-//    charAspectRatio = 0.3749f;
+    idealLineLength = 20;
     charAspectRatio = 0.324324324f; //League Gothic
+    charAspectRatio = 0.2;
     idealLineAspectRatio = charAspectRatio * idealLineLength; // 0.44518217 * 12 = 5.4218604
     
 
@@ -74,6 +73,7 @@
     
     // TODO: will figuring out how many lines we really have do anything to change?
     idealCharCountPerLine = (int)round([string length]/hypotheticalLineCount);
+    idealCharCountPerLine = 22;
     if(idealCharCountPerLine == 0)
         idealCharCountPerLine = 1;
 
@@ -87,6 +87,7 @@
     NSLog(@"idealLineHeight: %f",idealLineHeight);
     NSLog(@"hypotheticalLineCount: %d",hypotheticalLineCount);
     NSLog(@"idealCharCountPerLine: %d",idealCharCountPerLine);
+    NSLog(@"%f h x %f w",boxHeight, boxWidth);
 
     if (words == NULL) {
         words = [NSMutableArray arrayWithCapacity:0];
@@ -110,7 +111,7 @@
     
     // while we still have words left, build the next line
     while( wordIndex < wc){
-        NSLog(@"wordIndex: %d\twc: %d\t ptlen:%d\tidealCharCount:%d",wordIndex, wc, [postText length], idealCharCountPerLine);
+
         [postText setString:@""];
         
         // build two strings (preText and postText) word by word, with one
@@ -128,7 +129,7 @@
             wordIndex++;
 
             range = [postText rangeOfString:@"\n" options:NSBackwardsSearch];
-            NSLog(@"wordIndex: %d\twc: %d",wordIndex, wc);
+
             if (wordIndex >= wc || range.length > 0){
                 break;
             }
@@ -186,7 +187,7 @@
 
 -(NSAttributedString *)sizeLineToFit:(NSString *)line {
     float scale = 1.0f;
-    float fontSize = 12.0f;    
+    float fontSize = 6.0f;    
 
     CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], (fontSize * scale), NULL);
     NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
