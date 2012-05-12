@@ -12,6 +12,7 @@
 
 @synthesize flipsidePopoverController = _flipsidePopoverController;
 @synthesize slab, textInput;
+@synthesize charCountSlider, boxWidthSlider;
 
 - (void)didReceiveMemoryWarning
 {
@@ -39,15 +40,16 @@
     [super viewWillAppear:animated];
     
     // TODO: We can hide the text field here.
-    [textInput setHidden:NO];
+    [textInput setHidden:YES];
 
     if(!slab){
-        //    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
-        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
+//    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
+    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
+        //        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
     }
     NSMutableString *string = [NSMutableString string];
     //    [string setString:@"Happy Mothers Day! That's right, I care abou nmy mom so much I start Tweeting to her early."];
-    //    [string setString:@"\"Narnia, Narnia, Narnia, awake. Love. Think. Speak. Be walking trees. Be talking beasts. Be divine waters.\""];
+       [string setString:@"\"Narnia, Narnia, Narnia, awake. Love. Think. Speak. Be walking trees. Be talking beasts. Be divine waters.\""];
     //    [string setString:@"Dogs in the office"];
     //    [string setString:@" I might push towards poke for dinner tonight"];
     //    [string setString:@"Another day, another iOS surprise"];
@@ -57,11 +59,13 @@
     //    [string setString:@"\"Debt robs you of your options.\""];
     //    [string setString:@"Violence might be verbal violence the cos put on the women"];
     //    [string setString:@"I WISH IT WAS THAT SIMPLE\nTHAT I COULD ERASE MY PAST"];
+//        [string setString:@"Debt robs you of your options."];
     
-    [string setString:@""]; 
+//    [string setString:@""]; 
     [slab splitTextInString:string];
     [textInput setText:[slab sentence]];
     [self.view addSubview:slab];
+    [self.view sendSubviewToBack:slab];
 
 }
 
@@ -91,12 +95,37 @@
     }
 }
 
-#pragma mark - textInput delegates
+#pragma mark - input delegates
 
 - (void)textViewDidChange:(UITextView *)textView {
     [slab clearText];
-    [slab splitTextInString: [[textView text] uppercaseString]];
+    [slab splitTextInString: [textView text]];
     [slab setNeedsDisplay];
+}
+
+-(IBAction)sliderDidUpdateWithValue: (id) sender{
+    UISlider *slider = (UISlider *)sender;
+    int v = round(slider.value);
+    // Only send non-redundant updates
+    if( v != [slab manualCharCountPerLine]){
+        NSLog(@"Slider Val: %d", v);
+        [slab setManualCharCountPerLine:v];
+        [slab clearText];
+        [slab splitTextInString: [textInput text]];
+        [slab setNeedsDisplay];
+    }
+}
+
+-(IBAction)boxSliderUpdated: (id) sender{
+    UISlider *slider = (UISlider *)sender;
+    float w = round(slider.value);
+    if(w != slab.frame.size.width){
+        CGRect newFrame = CGRectMake(slab.frame.origin.x, slab.frame.origin.y, w, slab.frame.size.height);
+        [slab setFrame:newFrame];
+        [slab clearText];
+        [slab splitTextInString: [textInput text]];
+        [slab setNeedsDisplay];
+    }
 }
 
 

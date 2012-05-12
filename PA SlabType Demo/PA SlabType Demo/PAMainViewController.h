@@ -14,5 +14,10 @@
 @property (strong, nonatomic) UIPopoverController *flipsidePopoverController;
 @property (nonatomic, retain) PASlabText *slab;
 @property (nonatomic, retain) IBOutlet UITextView *textInput;
+@property (nonatomic, retain) IBOutlet UISlider *charCountSlider;
+@property (nonatomic, retain) IBOutlet UISlider *boxWidthSlider;
+
+-(IBAction)sliderDidUpdateWithValue: (id) sender;
+-(IBAction)boxSliderUpdated: (id) sender;
 
 @end
