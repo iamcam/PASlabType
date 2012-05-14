@@ -224,11 +224,12 @@
         { kCTParagraphStyleSpecifierMaximumLineHeight, sizeof(CGFloat), &maxLineHeight},
     };
     /**
-     Touching 
+    Line height sample code at http://developer.apple.com/library/ios/#documentation/StringsTextFonts/Conceptual/CoreText_Programming/Operations/Operations.html
      **/
     CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(theSettings, 5);
-    
-    fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], (fontSize * scale), NULL);
+    float newFontSize = (fontSize * scale);
+
+    fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], newFontSize, NULL);
     attrs = [NSDictionary dictionaryWithObjectsAndKeys:
              (id) self.color.CGColor, kCTForegroundColorAttributeName,
              (__bridge id) fontRef, kCTFontAttributeName,
