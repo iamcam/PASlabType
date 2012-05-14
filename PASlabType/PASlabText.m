@@ -181,7 +181,6 @@
 
     }
     
-    
     return finalString;
 }
 
@@ -281,7 +280,9 @@
     NSLog(@"visible: %d\tnot Visible: %d", (int) range.length,(int) ([attString length] - range.length)-1);
     int invisibleStart = range.length;
     NSString *plainString = [attString string];
-    [overflow setString:[[plainString substringFromIndex: invisibleStart] stringByReplacingOccurrencesOfString:@"\n" withString:@" "]];
+    // I think it makes sense to just convert newlines to spaces, but that is probably a better job done *outside* the class.
+    // [overflow setString:[[plainString substringFromIndex: invisibleStart] stringByReplacingOccurrencesOfString:@"\n" withString:@" "]]; 
+    [overflow setString:[plainString substringFromIndex:invisibleStart]];
     NSLog(@"Overflow: %@", overflow);
     
 
