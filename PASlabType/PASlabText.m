@@ -13,7 +13,7 @@
 @implementation PASlabText
 
 @synthesize charAspectRatio, idealLineLength, idealLineAspectRatio, boxWidth, boxHeight, idealLineHeight, hypotheticalLineCount, idealCharCountPerLine;
-@synthesize sentence, words, lines;
+@synthesize sentence, words, lines, overflow;
 @synthesize font, color, strokeColor, strokeWidth;
 @synthesize fontChoices;
 @synthesize manualCharCountPerLine; // TODO: probably won't stay
@@ -30,7 +30,7 @@
         boxHeight = self.frame.size.height;
         [self setOpaque:NO];
         [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.15]];
-        
+        overflow = [[NSMutableString alloc] initWithString:@""];
 
         if(!fontChoices){
             //Optional choices: @"Ostrich Sans Black",@"Ostrich Sans Bold"
@@ -270,7 +270,20 @@
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attString); //3
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
                              CFRangeMake(0, [attString length]), path, NULL);
+    CFRange range;
+    CGSize constraints = CGSizeMake(self.frame.size.width, self.frame.size.height);
+    CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,[attString length]), NULL, constraints, &range);
+    NSLog(@"Suggested\tw:%f\th:%f\tlen:%d\tloc:%d",suggestedSize.width, suggestedSize.height, (int) range.length, (int) range.location);
+    NSLog(@"Actual: \tw:%f,\th:%f",self.frame.size.width, self.frame.size.height);
     
+    range = CTFrameGetVisibleStringRange(frame);
+    NSLog(@"visible: %d\tnot Visible: %d", (int) range.length,(int) ([attString length] - range.length)-1);
+    int invisibleStart = range.length;
+    NSString *plainString = [attString string];
+    [overflow setString:[[plainString substringFromIndex: invisibleStart] stringByReplacingOccurrencesOfString:@"\n" withString:@" "]];
+    NSLog(@"Overflow: %@", overflow);
+    
+
     CTFrameDraw(frame, context); //4
     
     CFRelease(frame); //5

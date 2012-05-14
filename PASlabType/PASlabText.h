@@ -28,7 +28,7 @@
 @property (nonatomic, retain) NSString *sentence;
 @property (nonatomic, retain) NSArray *words;
 @property (nonatomic, retain) NSMutableArray *lines;
-
+@property (nonatomic, retain) NSMutableString *overflow;
 
 @property (nonatomic, retain) NSString *font;
 @property (nonatomic, retain) UIColor *color;
