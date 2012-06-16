@@ -43,18 +43,22 @@
     [textInput setHidden:YES];
 
     if(!slab){
-//    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
-    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
+    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
+//    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
         //        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
     }
     NSMutableString *string = [NSMutableString string];
     //    [string setString:@"Happy Mothers Day! That's right, I care abou nmy mom so much I start Tweeting to her early."];
-       [string setString:@"\"Narnia, Narnia, Narnia, awake. Love. Think. Speak. Be walking trees. Be talking beasts. Be divine waters.\""];
+//       [string setString:@"\"Narnia, Narnia, Narnia, awake. Love. Think. Speak. Be walking trees. Be talking beasts. Be divine waters.\""];
+//    [string setString:@"I'M STARTING TO\nPREFER SKIPPING\nMOVIES IN THE THEATER\nJUST SO I HAVE"];
     //    [string setString:@"Dogs in the office"];
     //    [string setString:@" I might push towards poke for dinner tonight"];
     //    [string setString:@"Another day, another iOS surprise"];
     //    [string setString:@"Stop Selling & Start Telling"];
-    //    [string setString:@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example"];
+//    [string setString:[@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example" capitalizedString]];
+    [string setString:@"Leadership has nothing to do w\nsomethingorother"];
+    [string setString:@"THIS COULD BE THE\nGOLDEN\nTICKET THAT GETS US TO WONKA"];
+
     //    [string setString:@"Passion leads"];
     //    [string setString:@"\"Debt robs you of your options.\""];
     //    [string setString:@"Violence might be verbal violence the cos put on the women"];

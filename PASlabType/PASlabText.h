@@ -28,6 +28,7 @@
 @property (nonatomic, retain) NSString *sentence;
 @property (nonatomic, retain) NSArray *words;
 @property (nonatomic, retain) NSMutableArray *lines;
+@property (nonatomic, retain) NSMutableArray *lineInfo;
 @property (nonatomic, retain) NSMutableString *overflow;
 
 @property (nonatomic, retain) NSString *font;
@@ -36,9 +37,11 @@
 @property (readwrite, assign) float strokeWidth;
 
 @property (nonatomic, retain) NSArray *fontChoices;
+@property (nonatomic, retain) NSMutableDictionary *selectedFontDict;
 
 -(void)splitTextInString: (NSString *)string;
 -(NSAttributedString *)formatLinesForLayout;
 -(NSAttributedString *)sizeLineToFit:(NSString *)line;
+
 -(void) clearText;
 @end

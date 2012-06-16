@@ -13,9 +13,9 @@
 @implementation PASlabText
 
 @synthesize charAspectRatio, idealLineLength, idealLineAspectRatio, boxWidth, boxHeight, idealLineHeight, hypotheticalLineCount, idealCharCountPerLine;
-@synthesize sentence, words, lines, overflow;
+@synthesize sentence, words, lines, lineInfo, overflow;
 @synthesize font, color, strokeColor, strokeWidth;
-@synthesize fontChoices;
+@synthesize fontChoices, selectedFontDict;
 @synthesize manualCharCountPerLine; // TODO: probably won't stay
 
 - (id)initWithFrame:(CGRect)frame
@@ -34,7 +34,7 @@
 
         if(!fontChoices){
             //Optional choices: @"Ostrich Sans Black",@"Ostrich Sans Bold"
-            fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",@"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive", nil];
+            fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",  @"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
             strokeColor = [UIColor blueColor];
             strokeWidth = 0.0f;
@@ -174,21 +174,39 @@
     
     int lc = [lines count];
 
+    if(! lineInfo ){
+        lineInfo = [[NSMutableArray alloc] initWithCapacity: lc];
+    } else {
+        [lineInfo removeAllObjects];
+    }
+
     for( int ii = 0; ii < lc; ii++){
         NSString *line = [NSString stringWithFormat:@"%@\n",[lines objectAtIndex:ii]];
-        
-        [finalString appendAttributedString:[self sizeLineToFit:line]];
 
+        //The line's info is allso added to the array in sizeLineToFit
+        NSAttributedString *tmpString = [self sizeLineToFit:line];
+        [finalString appendAttributedString:tmpString];
     }
     
     return finalString;
 }
 
+
+
+/**
+ * Sizes the lines to fit the horizontal width of the frame
+ */
 -(NSAttributedString *)sizeLineToFit:(NSString *)line {
     float scale = 1.0f;
     float fontSize = 6.0f;    
+    NSLog(@"Line: %@", line);
+    
 
     CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], (fontSize * scale), NULL);
+    
+    /********/
+
+    /********/
     NSDictionary *attrs = [NSDictionary dictionaryWithObjectsAndKeys:
                            (id) self.color.CGColor, kCTForegroundColorAttributeName,
                            (__bridge id) fontRef, kCTFontAttributeName,
@@ -198,21 +216,45 @@
     NSAttributedString *tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
     CTLineRef lineRef = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef) tmpString);
     
-    CGFloat ascent;
-    CGFloat descent;
+    CGFloat ascent, descent, leading, capHeight, xHeight;
     CGFloat lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
-    
+        
     float whitespace = CTLineGetTrailingWhitespaceWidth(lineRef);
     float realTextWidth = lineWidth - whitespace;
     scale = self.frame.size.width / realTextWidth;
     
     // http://stackoverflow.com/questions/5312962/line-spacing-and-paragraph-alignment-in-coretext/6056018#6056018
-    float spaceBetweenParaghraphs = 0.0f;
-    float topSpacing = 0.0f;
-    float spaceBetweenLines = 0.0;
+    float spaceBetweenParaghraphs = 0.1f;
+    float topSpacing = 0.1f;
+    float spaceBetweenLines = 0.1; //default 0.0
     float minLineHeight = ascent * scale; //helps us get real tight
     float maxLineHeight = ascent * scale; //helps us get real tight
+    
+    ascent = CTFontGetAscent(fontRef);
+    descent = CTFontGetDescent(fontRef);
+    leading = CTFontGetLeading(fontRef);
+    capHeight = CTFontGetCapHeight(fontRef);
+    xHeight = CTFontGetXHeight(fontRef);
+    float lineHeight = ascent + descent + leading; //Technically correct, but for our purposes, not so much.
+    maxLineHeight = (ascent - descent) * scale;
+    minLineHeight  = (ascent - descent) * scale;
 
+    
+
+    if([lineInfo count] > 0){
+        float prevDesc = [[[lineInfo lastObject] objectForKey:@"descent"] floatValue];
+//        maxLineHeight = ascent*scale + descent*scale - (prevDesc); //CHUNK5
+        maxLineHeight = ascent*scale + descent*scale/3 - (prevDesc)*0.75; //LEAGUE
+        //        maxLineHeight = lineHeight * scale;
+        minLineHeight = maxLineHeight;
+        NSLog(@"Previous Descent: %.3f", prevDesc);
+    } else {
+        maxLineHeight = ascent * scale;
+    }
+    
+
+//    NSLog(@"Ascent: %.3f\tDescent: %.3f\tLeading: %.3f\tCap Height: %.3f\tX Height: %.3f\tLH: %.3f\t", ascent, descent, leading, capHeight,xHeight, lineHeight);
+//    NSLog(@"Ascent: %.3f\tDescent: %.3f\tLeading: %.3f\tCap Height: %.3f\tX Height: %.3f\tLH: %.3f\t", ascent * scale, descent * scale, leading * scale, capHeight * scale,xHeight * scale, lineHeight * scale);
     
     CTParagraphStyleSetting theSettings[5] = 
     {
@@ -240,8 +282,31 @@
     tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
     lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
 
-//    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
-    NSLog(@"scale: %f\tfont size: %f\tascent: %f\tdescent: %f\tascent*scale: %f\t descent*scale: %f",scale,(fontSize * scale), ascent, descent, (ascent * scale), (descent*scale));
+    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
+    NSLog(@"scale: %f\tfont size: %f\tfontScale: %f\tascent: %f\tdescent: %f\tascent*scale: %f\t descent*scale: %f",scale,fontSize, (fontSize * scale), ascent, descent, (ascent * scale), (descent*scale));
+
+//    NSRange range = NSMakeRange(0, [tmpString length]);
+//    NSLog(@"tmpString: %@", [tmpString attributesAtIndex:0 effectiveRange: &range]);
+
+    /*
+     * Create a dictionary holding the metrics for the resized text so we can do a look-back and adjust line heights as necessary
+     * All font metris have the scale applied as it is seen in this line.
+     */
+    
+    NSDictionary *infoDict = [[NSDictionary alloc] initWithObjectsAndKeys:
+                              [NSNumber numberWithFloat:newFontSize], @"fontSize",
+                              [NSNumber numberWithFloat:scale], @"scale",
+                              [NSNumber numberWithFloat:ascent * scale], @"ascent",
+                              [NSNumber numberWithFloat:descent * scale], @"descent",
+                              [NSNumber numberWithFloat:leading * scale], @"leading",
+                              [NSNumber numberWithFloat:capHeight * scale], @"capHeight",
+                              [NSNumber numberWithFloat:minLineHeight], @"minLineHeight",
+                              [NSNumber numberWithFloat:maxLineHeight], @"maxLineHeight"
+                              , nil];
+    
+    [lineInfo addObject:infoDict];
+    
+//    NSLog(@"infoDict: %@", infoDict);
     return tmpString;
 }
 

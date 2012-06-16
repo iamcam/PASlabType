@@ -45,7 +45,7 @@
                                     <action selector="sliderDidUpdateWithValue:" destination="2" eventType="valueChanged" id="hzZ-VV-WbC"/>
                                 </connections>
                             </slider>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="150" minValue="100" maxValue="300" id="1Ap-32-vt8">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="300" minValue="100" maxValue="300" id="1Ap-32-vt8">
                                 <rect key="frame" x="181" y="212" width="131" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
