@@ -45,7 +45,7 @@
 
     if(!slab){
     slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
-//        [slab selectFontWithName:@"ChunkFive"];
+        [slab selectFontWithName:@"ChunkFive"];
 //    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
         //        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
     }
