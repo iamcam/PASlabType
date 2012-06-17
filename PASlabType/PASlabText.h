@@ -32,19 +32,19 @@
 @property (nonatomic, retain) NSMutableArray *lineInfo;
 @property (nonatomic, retain) NSMutableString *overflow;
 
-@property (nonatomic, retain) NSString *font;
+//@property (nonatomic, retain) NSString *font;
 @property (nonatomic, retain) UIColor *color;
 @property (nonatomic, retain) UIColor *strokeColor;
 @property (readwrite, assign) float strokeWidth;
 
 @property (nonatomic, retain) NSArray *fontChoices;
 @property (nonatomic, retain) NSMutableDictionary *selectedFontDict;
-@property (nonatomic, retain) PASlabFont *selectedFont;
+@property (nonatomic, retain) PASlabFont *font;
 
 -(void)splitTextInString: (NSString *)string;
 -(NSAttributedString *)formatLinesForLayout;
 -(NSAttributedString *)sizeLineToFit:(NSString *)line;
--(PASlabFont *)selectFontWithName: (NSString *)name;
+-(void)selectFontWithName: (NSString *)name;
 
 -(void) clearText;
 @end

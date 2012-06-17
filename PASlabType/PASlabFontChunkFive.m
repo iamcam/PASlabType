@@ -15,13 +15,21 @@
         return nil;
     }
     
+    fontName = [NSString stringWithFormat:@"ChunkFive"];
+    
     //autoload some options
+    [self saySomething];
     
     return self;
+}
+
+-(float) lineHeightUsingScale:(float)scale ascent:(float)ascent descent:(float)descent leading:(float)leading previousDescent:(float)previousDescent{
+    return ascent*scale + descent*scale - previousDescent;
 }
 
 -(void)saySomething{
     [super saySomething];
     NSLog(@"Chunk5");
 }
+
 @end

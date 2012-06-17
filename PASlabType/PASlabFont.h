@@ -8,11 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
-@interface PASlabFont : NSObject
+@interface PASlabFont : NSObject{
+    NSString *fontName;
+}
 
 @property (nonatomic, retain) NSString *fontName;
 
 -(id) init;
+-(id) initWithFontName:(NSString *)name;
 -(void) saySomething;
+-(float) lineHeightUsingScale:(float)scale ascent:(float)ascent descent:(float)descent previousDescent:(float)previousDescent;
+-(float) lineHeightUsingScale:(float)scale ascent:(float)ascent descent:(float)descent leading:(float)leading previousDescent:(float)previousDescent;
+
 
 @end

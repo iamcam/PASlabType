@@ -15,7 +15,7 @@
 @synthesize charAspectRatio, idealLineLength, idealLineAspectRatio, boxWidth, boxHeight, idealLineHeight, hypotheticalLineCount, idealCharCountPerLine;
 @synthesize sentence, words, lines, lineInfo, overflow;
 @synthesize font, color, strokeColor, strokeWidth;
-@synthesize fontChoices, selectedFontDict, selectedFont;
+@synthesize fontChoices, selectedFontDict;
 @synthesize manualCharCountPerLine; // TODO: probably won't stay
 
 - (id)initWithFrame:(CGRect)frame
@@ -33,16 +33,18 @@
         overflow = [[NSMutableString alloc] initWithString:@""];
 
         if(!fontChoices){
+            // Default Choices: @"Raleway-Thin",  @"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive"
             //Optional choices: @"Ostrich Sans Black",@"Ostrich Sans Bold"
             fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",  @"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
             strokeColor = [UIColor blueColor];
             strokeWidth = 0.0f;
-            font = [NSString stringWithFormat:@"Arial"];
+
         }
     }
     
-
+    [self selectFontWithName: @"ChunkFive"];
+//    [self selectFontWithName:@"League Gothic"];
     
     return self;
 }
@@ -54,9 +56,11 @@
  Additional help and clarification from the slabText jQuery plugin by @freqdec[2]
  [1] http://erikloyer.com/index.php/blog/the_slabtype_algorithm_part_1_background/                         
  [2] https://github.com/freqdec/slabText
-
  **/
+// FIXME: Adding a newline to some strings act like the line is a different length.
+// TODO: Test w/ Dave Ramsey quote and chunk5: "example" w/ and w/o \n
 -(void) splitTextInString: (NSString *)string {
+
     sentence = [string stringByReplacingOccurrencesOfString:@"\n" withString:@"\n "];
     boxWidth = self.frame.size.width;
     boxHeight = self.frame.size.height;
@@ -204,8 +208,8 @@
     float fontSize = 6.0f;    
     NSLog(@"Line: %@", line);
     
-
-    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], (fontSize * scale), NULL);
+    
+    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[font fontName], (fontSize * scale), NULL);
     
     /********/
 
@@ -242,12 +246,13 @@
     maxLineHeight = (ascent - descent) * scale;
     minLineHeight  = (ascent - descent) * scale;
 
-    
-
     if([lineInfo count] > 0){
         float prevDesc = [[[lineInfo lastObject] objectForKey:@"descent"] floatValue];
+//        maxLineHeight = [font lineHeightUsingScale:scale ascent:ascent descent:descent leading:leading previousDescent:prevDesc];
+        maxLineHeight = [font lineHeightUsingScale:scale ascent:ascent descent:descent previousDescent:prevDesc];
+
 //        maxLineHeight = ascent*scale + descent*scale - (prevDesc); //CHUNK5
-        maxLineHeight = ascent*scale + descent*scale/3 - (prevDesc)*0.75; //LEAGUE
+//        maxLineHeight = ascent*scale + descent*scale/3 - (prevDesc)*0.75; //LEAGUE
         //        maxLineHeight = lineHeight * scale;
         minLineHeight = maxLineHeight;
         NSLog(@"Previous Descent: %.3f", prevDesc);
@@ -273,7 +278,7 @@
     CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(theSettings, 5);
     float newFontSize = (fontSize * scale);
 
-    fontRef = CTFontCreateWithName((__bridge CFStringRef)[fontChoices objectAtIndex:1], newFontSize, NULL);
+    fontRef = CTFontCreateWithName((__bridge CFStringRef) [font fontName], newFontSize, NULL);
     attrs = [NSDictionary dictionaryWithObjectsAndKeys:
              (id) self.color.CGColor, kCTForegroundColorAttributeName,
              (__bridge id) fontRef, kCTFontAttributeName,
@@ -367,9 +372,10 @@
  * Pass a name of the font. Assuming the font exists, an object representing the font is returned;
  * If the font does not exist in the project, the system default will be returned.
  */
--(PASlabFont *)selectFontWithName: (NSString *)name{
+-(void)selectFontWithName: (NSString *)name{
 
-    return [[PASlabFont alloc] init];
+    font = [[PASlabFont alloc] initWithFontName: name];
+    
 }
 
 
