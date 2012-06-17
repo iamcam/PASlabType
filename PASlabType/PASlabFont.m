@@ -28,17 +28,20 @@
 }
 
 -(id) initWithFontName:(NSString *)name {
+    
+    // Some fonts require a separate class to manage some metrics
     NSString *tmpName = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *className= [NSString stringWithFormat:@"PASlabFont%@", tmpName];
-    NSLog(@"Font Class Name: %@", className);
-    
     id fontObj = [[NSClassFromString(className) alloc] init];
-
+    
+    // If there is no class, simply pass the font name and the standard rules will apply
     if(!fontObj){
-        return [self init];
+        self = [super init];
+        fontName = name;
+        return self;
     }
-    [fontObj setFontName: name];
 
+    [fontObj setFontName: name];
     return fontObj;
 
 }
