@@ -254,7 +254,8 @@
         maxLineHeight = [font lineHeightUsingScale:scale ascent:ascent descent:descent previousDescent:prevDesc]; //there's also a similar func that uses leading.
         NSLog(@"Previous Descent: %.3f", prevDesc);
     } else {
-        maxLineHeight = ascent * scale;
+        //TODO: This is maybe another place to consider a custom per-font method.
+        maxLineHeight = (ascent + descent) * scale;
     }
     
 
