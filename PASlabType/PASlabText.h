@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
+#import "PASlabFont.h"
 
 @interface PASlabText : UIView
 
@@ -38,6 +39,7 @@
 
 @property (nonatomic, retain) NSArray *fontChoices;
 @property (nonatomic, retain) NSMutableDictionary *selectedFontDict;
+@property (nonatomic, retain) PASlabFont *selectedFont;
 
 -(void)splitTextInString: (NSString *)string;
 -(NSAttributedString *)formatLinesForLayout;

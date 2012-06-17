@@ -15,7 +15,7 @@
 @synthesize charAspectRatio, idealLineLength, idealLineAspectRatio, boxWidth, boxHeight, idealLineHeight, hypotheticalLineCount, idealCharCountPerLine;
 @synthesize sentence, words, lines, lineInfo, overflow;
 @synthesize font, color, strokeColor, strokeWidth;
-@synthesize fontChoices, selectedFontDict;
+@synthesize fontChoices, selectedFontDict, selectedFont;
 @synthesize manualCharCountPerLine; // TODO: probably won't stay
 
 - (id)initWithFrame:(CGRect)frame
@@ -41,6 +41,9 @@
             font = [NSString stringWithFormat:@"Arial"];
         }
     }
+    
+
+    
     return self;
 }
 
