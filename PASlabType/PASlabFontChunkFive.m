@@ -14,11 +14,7 @@
     if(!(self=[super init])){
         return nil;
     }
-    
-    fontName = [NSString stringWithFormat:@"ChunkFive"];
-    
-    //autoload some options
-    [self saySomething];
+
     
     return self;
 }

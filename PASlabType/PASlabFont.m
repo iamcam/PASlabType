@@ -37,6 +37,7 @@
     if(!fontObj){
         return [self init];
     }
+    [fontObj setFontName: name];
 
     return fontObj;
 
