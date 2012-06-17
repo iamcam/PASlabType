@@ -361,7 +361,16 @@
     CFRelease(framesetter);
 }
 
+#pragma mark - Font Stuffs
 
+/*
+ * Pass a name of the font. Assuming the font exists, an object representing the font is returned;
+ * If the font does not exist in the project, the system default will be returned.
+ */
+-(PASlabFont *)selectFontWithName: (NSString *)name{
+
+    return [[PASlabFont alloc] init];
+}
 
 
 @end

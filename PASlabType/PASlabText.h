@@ -44,6 +44,7 @@
 -(void)splitTextInString: (NSString *)string;
 -(NSAttributedString *)formatLinesForLayout;
 -(NSAttributedString *)sizeLineToFit:(NSString *)line;
+-(PASlabFont *)selectFontWithName: (NSString *)name;
 
 -(void) clearText;
 @end
