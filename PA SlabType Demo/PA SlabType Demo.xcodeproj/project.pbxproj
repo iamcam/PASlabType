@@ -10,6 +10,7 @@
 		C2058D461558AE9A00453269 /* PASlabText.m in Sources */ = {isa = PBXBuildFile; fileRef = C2058D451558AE9A00453269 /* PASlabText.m */; };
 		C229BB84158CD876008CF650 /* PASlabFont.m in Sources */ = {isa = PBXBuildFile; fileRef = C229BB83158CD876008CF650 /* PASlabFont.m */; };
 		C229BB88158CD93F008CF650 /* PASlabFontChunkFive.m in Sources */ = {isa = PBXBuildFile; fileRef = C229BB87158CD93F008CF650 /* PASlabFontChunkFive.m */; };
+		C229BB9C158D96FE008CF650 /* PASlabFontLeagueGothic.m in Sources */ = {isa = PBXBuildFile; fileRef = C229BB9B158D96FE008CF650 /* PASlabFontLeagueGothic.m */; };
 		C249E6CB155C9331005FD83D /* League Gothic.otf in Resources */ = {isa = PBXBuildFile; fileRef = C249E6CA155C9331005FD83D /* League Gothic.otf */; };
 		C249E6CD155C953B005FD83D /* Chunk.otf in Resources */ = {isa = PBXBuildFile; fileRef = C249E6CC155C953B005FD83D /* Chunk.otf */; };
 		C249E6CF155C95DB005FD83D /* Raleway Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = C249E6CE155C95DB005FD83D /* Raleway Thin.otf */; };
@@ -52,6 +53,8 @@
 		C229BB86158CD93F008CF650 /* PASlabFontChunkFive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASlabFontChunkFive.h; path = ../PASlabType/PASlabFontChunkFive.h; sourceTree = "<group>"; };
 		C229BB87158CD93F008CF650 /* PASlabFontChunkFive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASlabFontChunkFive.m; path = ../PASlabType/PASlabFontChunkFive.m; sourceTree = "<group>"; };
 		C229BB95158D6BB3008CF650 /* PAFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFonts.h; sourceTree = "<group>"; };
+		C229BB9A158D96FD008CF650 /* PASlabFontLeagueGothic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASlabFontLeagueGothic.h; path = ../PASlabType/PASlabFontLeagueGothic.h; sourceTree = "<group>"; };
+		C229BB9B158D96FE008CF650 /* PASlabFontLeagueGothic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASlabFontLeagueGothic.m; path = ../PASlabType/PASlabFontLeagueGothic.m; sourceTree = "<group>"; };
 		C249E6CA155C9331005FD83D /* League Gothic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "League Gothic.otf"; path = "../Fonts/League Gothic/League Gothic.otf"; sourceTree = "<group>"; };
 		C249E6CC155C953B005FD83D /* Chunk.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Chunk.otf; path = ../Fonts/Chunk/Chunk.otf; sourceTree = "<group>"; };
 		C249E6CE155C95DB005FD83D /* Raleway Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway Thin.otf"; path = "../Fonts/Raleway/Raleway Thin.otf"; sourceTree = "<group>"; };
@@ -126,6 +129,8 @@
 				C229BB86158CD93F008CF650 /* PASlabFontChunkFive.h */,
 				C229BB87158CD93F008CF650 /* PASlabFontChunkFive.m */,
 				C229BB95158D6BB3008CF650 /* PAFonts.h */,
+				C229BB9A158D96FD008CF650 /* PASlabFontLeagueGothic.h */,
+				C229BB9B158D96FE008CF650 /* PASlabFontLeagueGothic.m */,
 			);
 			name = FontClasses;
 			sourceTree = "<group>";
@@ -343,6 +348,7 @@
 				C2058D461558AE9A00453269 /* PASlabText.m in Sources */,
 				C229BB84158CD876008CF650 /* PASlabFont.m in Sources */,
 				C229BB88158CD93F008CF650 /* PASlabFontChunkFive.m in Sources */,
+				C229BB9C158D96FE008CF650 /* PASlabFontLeagueGothic.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

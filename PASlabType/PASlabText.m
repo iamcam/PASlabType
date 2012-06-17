@@ -43,8 +43,8 @@
         }
     }
     
-    [self selectFontWithName: @"ChunkFive"];
-//    [self selectFontWithName:@"League Gothic"];
+//    [self selectFontWithName: @"ChunkFive"];
+    [self selectFontWithName:@"League Gothic"];
     
     return self;
 }
