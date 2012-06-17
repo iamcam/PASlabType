@@ -124,11 +124,11 @@
 		C229BB89158D5C51008CF650 /* FontClasses */ = {
 			isa = PBXGroup;
 			children = (
+				C229BB95158D6BB3008CF650 /* PAFonts.h */,
 				C229BB82158CD876008CF650 /* PASlabFont.h */,
 				C229BB83158CD876008CF650 /* PASlabFont.m */,
 				C229BB86158CD93F008CF650 /* PASlabFontChunkFive.h */,
 				C229BB87158CD93F008CF650 /* PASlabFontChunkFive.m */,
-				C229BB95158D6BB3008CF650 /* PAFonts.h */,
 				C229BB9A158D96FD008CF650 /* PASlabFontLeagueGothic.h */,
 				C229BB9B158D96FE008CF650 /* PASlabFontLeagueGothic.m */,
 			);
