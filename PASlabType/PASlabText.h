@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreText/CoreText.h>
-#import "PASlabFont.h"
+#import "PAFonts.h"
 
 @interface PASlabText : UIView
 

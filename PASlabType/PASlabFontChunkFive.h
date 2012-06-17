@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "PASlabFont.h"
+#import "PAFonts.h"
 
 @interface PASlabFontChunkFive : PASlabFont
 

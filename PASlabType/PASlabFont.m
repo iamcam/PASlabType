@@ -7,7 +7,7 @@
 //
 
 #import "PASlabFont.h"
-#import "PASlabFontChunkFive.h"
+
 
 @implementation PASlabFont
 @synthesize fontName;
