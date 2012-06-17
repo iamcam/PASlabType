@@ -59,6 +59,7 @@
  [2] https://github.com/freqdec/slabText
  **/
 // FIXME: Adding a newline to some strings act like the line is a different length.
+// FIXME: if there is only one line, large text is clipped
 // TODO: Test w/ Dave Ramsey quote and chunk5: "example" w/ and w/o \n
 -(void) splitTextInString: (NSString *)string {
 
