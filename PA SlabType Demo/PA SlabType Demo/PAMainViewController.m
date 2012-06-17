@@ -45,6 +45,7 @@
 
     if(!slab){
     slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
+//        [slab selectFontWithName:@"ChunkFive"];
 //    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
         //        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
     }
@@ -66,7 +67,8 @@
     //    [string setString:@"I WISH IT WAS THAT SIMPLE\nTHAT I COULD ERASE MY PAST"];
 //        [string setString:@"Debt robs you of your options."];
     
-//    [string setString:@""]; 
+//    [string setString:@""];
+    
     [slab splitTextInString:string];
     [textInput setText:[slab sentence]];
     [self.view addSubview:slab];

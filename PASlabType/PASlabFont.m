@@ -22,7 +22,7 @@
     }
     //Return the system default
     fontName = [[UIFont systemFontOfSize:6.0] fontName];
-    
+    NSLog(@"Setting default system font: %@", fontName);
     //any other init code?
     return self;
 }

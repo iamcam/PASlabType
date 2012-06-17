@@ -35,6 +35,7 @@
         if(!fontChoices){
             // Default Choices: @"Raleway-Thin",  @"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive"
             //Optional choices: @"Ostrich Sans Black",@"Ostrich Sans Bold"
+            font = [[PASlabFont alloc] init];
             fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",  @"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
             strokeColor = [UIColor blueColor];
@@ -44,7 +45,7 @@
     }
     
 //    [self selectFontWithName: @"ChunkFive"];
-    [self selectFontWithName:@"League Gothic"];
+//    [self selectFontWithName:@"League Gothic"];
     
     return self;
 }
@@ -223,7 +224,7 @@
     NSAttributedString *tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
     CTLineRef lineRef = CTLineCreateWithAttributedString((__bridge CFAttributedStringRef) tmpString);
     
-    CGFloat ascent, descent, leading, capHeight, xHeight;
+    CGFloat ascent, descent, leading, capHeight;
     CGFloat lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
         
     float whitespace = CTLineGetTrailingWhitespaceWidth(lineRef);
@@ -241,8 +242,8 @@
     descent = CTFontGetDescent(fontRef);
     leading = CTFontGetLeading(fontRef);
     capHeight = CTFontGetCapHeight(fontRef);
-    xHeight = CTFontGetXHeight(fontRef);
-    float lineHeight = ascent + descent + leading; //Technically correct, but for our purposes, not so much.
+//   float xHeight = CTFontGetXHeight(fontRef);
+//   float lineHeight = ascent + descent + leading; //Technically correct, but for our purposes, not so much.
     maxLineHeight = (ascent - descent) * scale;
     minLineHeight  = (ascent - descent) * scale;
 
@@ -373,7 +374,8 @@
  * If the font does not exist in the project, the system default will be returned.
  */
 -(void)selectFontWithName: (NSString *)name{
-
+    font = nil;
+    
     font = [[PASlabFont alloc] initWithFontName: name];
     
 }
