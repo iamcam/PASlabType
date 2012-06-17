@@ -41,6 +41,7 @@
     
     // TODO: We can hide the text field here.
     [textInput setHidden:YES];
+    [textInput setAutocorrectionType:UITextAutocorrectionTypeNo];
 
     if(!slab){
     slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
