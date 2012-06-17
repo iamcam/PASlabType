@@ -204,6 +204,7 @@
 /**
  * Sizes the lines to fit the horizontal width of the frame
  */
+// FIXME: Large text on first line clips the top off
 -(NSAttributedString *)sizeLineToFit:(NSString *)line {
     float scale = 1.0f;
     float fontSize = 6.0f;    
@@ -244,18 +245,12 @@
     capHeight = CTFontGetCapHeight(fontRef);
 //   float xHeight = CTFontGetXHeight(fontRef);
 //   float lineHeight = ascent + descent + leading; //Technically correct, but for our purposes, not so much.
-    maxLineHeight = (ascent - descent) * scale;
-    minLineHeight  = (ascent - descent) * scale;
+//    maxLineHeight = (ascent - descent) * scale;
+//    minLineHeight  = (ascent - descent) * scale;
 
     if([lineInfo count] > 0){
         float prevDesc = [[[lineInfo lastObject] objectForKey:@"descent"] floatValue];
-//        maxLineHeight = [font lineHeightUsingScale:scale ascent:ascent descent:descent leading:leading previousDescent:prevDesc];
-        maxLineHeight = [font lineHeightUsingScale:scale ascent:ascent descent:descent previousDescent:prevDesc];
-
-//        maxLineHeight = ascent*scale + descent*scale - (prevDesc); //CHUNK5
-//        maxLineHeight = ascent*scale + descent*scale/3 - (prevDesc)*0.75; //LEAGUE
-        //        maxLineHeight = lineHeight * scale;
-        minLineHeight = maxLineHeight;
+        maxLineHeight = [font lineHeightUsingScale:scale ascent:ascent descent:descent previousDescent:prevDesc]; //there's also a similar func that uses leading.
         NSLog(@"Previous Descent: %.3f", prevDesc);
     } else {
         maxLineHeight = ascent * scale;
