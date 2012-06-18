@@ -10,8 +10,15 @@
 #import <CoreText/CoreText.h>
 #import "PAFonts.h"
 
-@interface PASlabText : UIView
+@protocol PASlabTextDelegate
 
+@optional
+-(void)textBoundsDidChangeWithFrame: (CGRect)frame;
+
+@end
+
+@interface PASlabText : UIView
+@property (nonatomic, retain) id <PASlabTextDelegate> delegate;
 
 @property (readwrite, assign) float charAspectRatio;                // 0.44518217
 @property (readwrite, assign) int idealLineLength;                  // 12
@@ -40,6 +47,7 @@
 @property (nonatomic, retain) NSArray *fontChoices;
 @property (nonatomic, retain) NSMutableDictionary *selectedFontDict;
 @property (nonatomic, retain) PASlabFont *font;
+
 
 -(void)splitTextInString: (NSString *)string;
 -(NSAttributedString *)formatLinesForLayout;

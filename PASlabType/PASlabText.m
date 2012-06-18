@@ -12,6 +12,7 @@
 
 @implementation PASlabText
 
+@synthesize delegate;
 @synthesize charAspectRatio, idealLineLength, idealLineAspectRatio, boxWidth, boxHeight, idealLineHeight, hypotheticalLineCount, idealCharCountPerLine;
 @synthesize sentence, words, lines, lineInfo, overflow;
 @synthesize font, color, strokeColor, strokeWidth;
@@ -359,6 +360,10 @@
     NSLog(@"Overflow: %@", overflow);
     
     CTFrameDraw(frame, context); //4
+    
+    //Inform our delegate of te text frame
+//    [self.delegate textBoundsDidChangeWithFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, [self textHeight])];
+    [self.delegate textBoundsDidChangeWithFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, suggestedSize.height)];
     
     CFRelease(frame); //5
     CFRelease(path);
