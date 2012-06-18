@@ -46,7 +46,8 @@
     if(!slab){
     slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
         [slab selectFontWithName:@"ChunkFive"];
-//    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
+        [slab selectFontWithName:@"League Gothic"];
+        //    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
         //        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
     }
     NSMutableString *string = [NSMutableString string];
@@ -57,9 +58,9 @@
     //    [string setString:@" I might push towards poke for dinner tonight"];
     //    [string setString:@"Another day, another iOS surprise"];
     //    [string setString:@"Stop Selling & Start Telling"];
-//    [string setString:[@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example" capitalizedString]];
-    [string setString:@"Leadership has nothing to do w\nsomethingorother"];
-    [string setString:@"THIS COULD BE THE\nGOLDEN\nTICKET THAT GETS US TO WONKA"];
+    [string setString:[@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example" capitalizedString]];
+//    [string setString:@"Leadership has nothing to do w\nsomethingorother"];
+//    [string setString:@"THIS COULD BE THE\nGOLDEN\nTICKET THAT GETS US TO WONKA"];
 
     //    [string setString:@"Passion leads"];
     //    [string setString:@"\"Debt robs you of your options.\""];

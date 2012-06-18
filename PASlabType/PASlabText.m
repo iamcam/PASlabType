@@ -288,8 +288,8 @@
     tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
     lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
 
-    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
-    NSLog(@"scale: %f\tfont size: %f\tfontScale: %f\tascent: %f\tdescent: %f\tascent*scale: %f\t descent*scale: %f",scale,fontSize, (fontSize * scale), ascent, descent, (ascent * scale), (descent*scale));
+//    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
+//    NSLog(@"scale: %f\tfont size: %f\tfontScale: %f\tascent: %f\tdescent: %f\tascent*scale: %f\t descent*scale: %f",scale,fontSize, (fontSize * scale), ascent, descent, (ascent * scale), (descent*scale));
 
 //    NSRange range = NSMakeRange(0, [tmpString length]);
 //    NSLog(@"tmpString: %@", [tmpString attributesAtIndex:0 effectiveRange: &range]);
@@ -330,7 +330,7 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
     // Flip the coordinate system
     CGContextSetTextMatrix(context, CGAffineTransformIdentity);
-    CGContextTranslateCTM(context, 0, self.bounds.size.height + 15.0);
+    CGContextTranslateCTM(context, 0, self.bounds.size.height + 0.0);
     CGContextScaleCTM(context, 1.0, -1.0);
     
     CGMutablePathRef path = CGPathCreateMutable(); //1
@@ -351,12 +351,13 @@
     NSLog(@"visible: %d\tnot Visible: %d", (int) range.length,(int) ([attString length] - range.length)-1);
     int invisibleStart = range.length;
     NSString *plainString = [attString string];
+
     // I think it makes sense to just convert newlines to spaces, but that is probably a better job done *outside* the class.
     // [overflow setString:[[plainString substringFromIndex: invisibleStart] stringByReplacingOccurrencesOfString:@"\n" withString:@" "]]; 
     [overflow setString:[plainString substringFromIndex:invisibleStart]];
+
     NSLog(@"Overflow: %@", overflow);
     
-
     CTFrameDraw(frame, context); //4
     
     CFRelease(frame); //5

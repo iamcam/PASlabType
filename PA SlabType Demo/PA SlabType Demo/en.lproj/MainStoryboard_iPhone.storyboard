@@ -38,7 +38,7 @@
                                     <outlet property="delegate" destination="2" id="Ccf-Om-iYS"/>
                                 </connections>
                             </textView>
-                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="50" id="hb1-bN-xTv">
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="70" id="hb1-bN-xTv">
                                 <rect key="frame" x="181" y="182" width="131" height="23"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <connections>
