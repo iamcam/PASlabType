@@ -365,6 +365,15 @@
     CFRelease(framesetter);
 }
 
+-(float)textHeight {
+    // Get the actual line height of our text
+    int lc = [lineInfo count];
+    float totalHeight = 0.0;
+    for (int ii=0; ii<lc; ii++) {
+        totalHeight += [[[lineInfo objectAtIndex:ii] valueForKey:@"maxLineHeight"] floatValue];
+    }
+    return totalHeight;
+}
 #pragma mark - Font Stuffs
 
 /*

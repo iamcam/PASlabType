@@ -45,6 +45,7 @@
 -(NSAttributedString *)formatLinesForLayout;
 -(NSAttributedString *)sizeLineToFit:(NSString *)line;
 -(void)selectFontWithName: (NSString *)name;
+-(float)textHeight;
 
 -(void) clearText;
 @end
