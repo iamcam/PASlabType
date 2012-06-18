@@ -11,7 +11,7 @@
 @implementation PAMainViewController
 
 @synthesize flipsidePopoverController = _flipsidePopoverController;
-@synthesize slab, textInput;
+@synthesize slab, textInput, boundsView;
 @synthesize charCountSlider, boxWidthSlider;
 
 - (void)didReceiveMemoryWarning
@@ -44,7 +44,8 @@
     [textInput setAutocorrectionType:UITextAutocorrectionTypeNo];
 
     if(!slab){
-    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 300, 400)];
+        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 110, 230)];
+        [slab setDelegate:self];
         [slab selectFontWithName:@"ChunkFive"];
         [slab selectFontWithName:@"League Gothic"];
         //    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
@@ -136,6 +137,17 @@
     }
 }
 
+-(void)textBoundsDidChangeWithFrame:(CGRect)frame{
+    NSLog(@"Changed View Size, {%.1f,%.1f}, {%.1fw x %.1fh}", frame.origin.x, frame.origin.y,frame.size.width, frame.size.height);
+    if(! boundsView ){
+        boundsView = [[UIView alloc] initWithFrame:frame];
+        [boundsView setBackgroundColor:[UIColor colorWithRed:0.0 green:255.0 blue:255.0 alpha:0.5]];
+        [self.view addSubview:boundsView];
+    }else {
+        boundsView.frame = frame;
+    }
+    
+}
 
 #pragma mark - Flipside View Controller
 
