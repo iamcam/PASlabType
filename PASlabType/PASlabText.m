@@ -342,7 +342,13 @@
     CTFramesetterRef framesetter = CTFramesetterCreateWithAttributedString((__bridge CFAttributedStringRef)attString); //3
     CTFrameRef frame = CTFramesetterCreateFrame(framesetter,
                              CFRangeMake(0, [attString length]), path, NULL);
+
     CFRange range;
+    
+    
+    /**
+     Numbers to see if we can get some kind of useful dimensions
+     */
     CGSize constraints = CGSizeMake(self.frame.size.width, self.frame.size.height);
     CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,[attString length]), NULL, constraints, &range);
     NSLog(@"Suggested\tw:%f\th:%f\tlen:%d\tloc:%d",suggestedSize.width, suggestedSize.height, (int) range.length, (int) range.location);
@@ -379,6 +385,7 @@
     }
     return totalHeight;
 }
+
 #pragma mark - Font Stuffs
 
 /*
