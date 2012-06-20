@@ -40,7 +40,7 @@
             fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",  @"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
             strokeColor = [UIColor blueColor];
-            strokeWidth = 0.0f;
+            [self setStrokeWidth:0.0f];
 
         }
     }
@@ -117,8 +117,8 @@
     NSMutableString *preText = [[NSMutableString alloc] initWithString:@""];
     NSMutableString *postText = [[NSMutableString alloc] initWithString:@""];
     NSMutableString *finalText = [[NSMutableString alloc] initWithString:@""];
-    NSRange range;
-    
+    NSRange range = NSMakeRange(NSNotFound, 0); // Initialize with NOT FOUND, length 0 //http://stackoverflow.com/a/3504498
+
     // while we still have words left, build the next line
     while( wordIndex < wc){
 
@@ -144,8 +144,8 @@
                 break;
             }
         }
-        
-        if(range.length){
+
+        if(range.length > 0 ){
             [finalText setString:[postText stringByReplacingOccurrencesOfString:@"\n" withString:@""]];
         } else {
             // calculate the character difference between the two strings and the
