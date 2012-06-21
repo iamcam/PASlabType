@@ -276,7 +276,10 @@
      **/
     CTParagraphStyleRef paragraphStyle = CTParagraphStyleCreate(theSettings, 5);
     float newFontSize = (fontSize * scale);
-
+    
+    //CF vars aren't controlled by ARC, so we need to be a little more careful with retain/release
+    CFBridgingRelease(fontRef);
+    
     fontRef = CTFontCreateWithName((__bridge CFStringRef) [font fontName], newFontSize, NULL);
     attrs = [NSDictionary dictionaryWithObjectsAndKeys:
              (id) self.color.CGColor, kCTForegroundColorAttributeName,
@@ -287,9 +290,9 @@
              nil];
 
     tmpString = [[NSAttributedString alloc] initWithString:line attributes:attrs];
-    lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
+//    lineWidth = CTLineGetTypographicBounds(lineRef, &ascent, &descent, NULL);
 
-//    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
+    //    NSLog(@"LineWidth: %f,\twhitespace: %f,\trealTextWidth: %f,\tscale: %f,\tnewTextWidth: %f",lineWidth, whitespace, realTextWidth, scale, realTextWidth*scale);
 //    NSLog(@"scale: %f\tfont size: %f\tfontScale: %f\tascent: %f\tdescent: %f\tascent*scale: %f\t descent*scale: %f",scale,fontSize, (fontSize * scale), ascent, descent, (ascent * scale), (descent*scale));
 
 //    NSRange range = NSMakeRange(0, [tmpString length]);
@@ -312,8 +315,13 @@
                               , nil];
     
     [lineInfo addObject:infoDict];
-    
-//    NSLog(@"infoDict: %@", infoDict);
+
+    //CF vars aren't controlled by ARC, so we need to be a little more careful with retain/release
+    // See for more details: http://www.raywenderlich.com/5773/beginning-arc-in-ios-5-tutorial-part-2
+    CFBridgingRelease(fontRef);
+    CFBridgingRelease(paragraphStyle);
+    CFBridgingRelease(lineRef);
+
     return tmpString;
 }
 

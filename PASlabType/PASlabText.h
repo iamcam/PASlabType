@@ -18,7 +18,7 @@
 @end
 
 @interface PASlabText : UIView
-@property (nonatomic, retain) id <PASlabTextDelegate> delegate;
+@property (nonatomic, weak) id <PASlabTextDelegate> delegate;
 
 @property (readwrite, assign) float charAspectRatio;                // 0.44518217
 @property (readwrite, assign) int idealLineLength;                  // 12
@@ -33,20 +33,20 @@
 
 @property (readwrite, assign) int manualCharCountPerLine;
 
-@property (nonatomic, retain) NSString *sentence;
-@property (nonatomic, retain) NSArray *words;
-@property (nonatomic, retain) NSMutableArray *lines;
-@property (nonatomic, retain) NSMutableArray *lineInfo;
-@property (nonatomic, retain) NSMutableString *overflow;
+@property (nonatomic, strong) NSString *sentence;
+@property (nonatomic, strong) NSArray *words;
+@property (nonatomic, strong) NSMutableArray *lines;
+@property (nonatomic, strong) NSMutableArray *lineInfo;
+@property (nonatomic, strong) NSMutableString *overflow;
 
 //@property (nonatomic, retain) NSString *font;
-@property (nonatomic, retain) UIColor *color;
-@property (nonatomic, retain) UIColor *strokeColor;
+@property (nonatomic, strong) UIColor *color;
+@property (nonatomic, strong) UIColor *strokeColor;
 @property (readwrite, assign) float strokeWidth;
 
-@property (nonatomic, retain) NSArray *fontChoices;
-@property (nonatomic, retain) NSMutableDictionary *selectedFontDict;
-@property (nonatomic, retain) PASlabFont *font;
+@property (nonatomic, strong) NSArray *fontChoices;
+@property (nonatomic, strong) NSMutableDictionary *selectedFontDict;
+@property (nonatomic, strong) PASlabFont *font;
 
 
 -(void)splitTextInString: (NSString *)string;
