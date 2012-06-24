@@ -13,6 +13,7 @@
 @synthesize flipsidePopoverController = _flipsidePopoverController;
 @synthesize slab, textInput, boundsView;
 @synthesize charCountSlider, boxWidthSlider;
+@synthesize eastHandle, eastHandlePan, boxPan;
 
 - (void)didReceiveMemoryWarning
 {
@@ -75,7 +76,96 @@
     [textInput setText:[slab sentence]];
     [self.view addSubview:slab];
     [self.view sendSubviewToBack:slab];
+    
+    
+    CGRect frame = slab.frame;
+    self.boundsView = [[UIView alloc] initWithFrame:frame];
+    [self.boundsView setBackgroundColor:[UIColor colorWithRed:0.0 green:255.0 blue:255.0 alpha:0.3]];
+    [self.view addSubview:boundsView];
+    
+    self.eastHandle = [[UIView alloc] initWithFrame:CGRectMake(frame.origin.x + frame.size.width, frame.origin.y + frame.size.width, 25.0, 25.0)];
+    self.eastHandle.center = CGPointMake(frame.origin.x + frame.size.width, frame.origin.y + frame.size.width);
+    [self.eastHandle setBackgroundColor:[UIColor lightGrayColor]];
+    [self.view addSubview:self.eastHandle];
+    
+    self.eastHandlePan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(boxGrow:)];
+    [self.eastHandlePan setDelegate:self];
+    self.boxPan = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(moveBoxText:)];
+    [self.boxPan setDelegate:self];
+    
+    [self.eastHandle addGestureRecognizer:self.eastHandlePan];
+    [self.boundsView addGestureRecognizer:self.boxPan];
 
+
+}
+
+-(void)moveBoxText:(UIPanGestureRecognizer *)recognizer {
+
+    CGPoint translation = [recognizer translationInView:recognizer.view];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x,
+                                         recognizer.view.center.y + translation.y);
+    
+    self.eastHandle.center = CGPointMake(recognizer.view.frame.origin.x + recognizer.view.frame.size.width,
+                                         recognizer.view.frame.origin.y + recognizer.view.frame.size.height);
+    
+    self.slab.frame = CGRectMake(recognizer.view.frame.origin.x, recognizer.view.frame.origin.y, self.slab.frame.size.width, self.slab.frame.size.height);
+    
+    [recognizer setTranslation:CGPointMake(0.0, 0.0) inView:self.view];
+}
+
+
+-(void)boxGrow:(UIPanGestureRecognizer *)recognizer{
+    NSLog(@"Growing");
+    float aspect, x, y;
+    
+    y = self.boundsView.frame.size.height;
+    x = self.boundsView.frame.size.width;
+    aspect = y / x;
+    NSLog(@"%.1f / %.1f / %.4f", x, y, aspect);
+    
+    CGPoint translation = [recognizer translationInView:self.view];
+    recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x, 
+                                         recognizer.view.center.y + aspect * translation.x);
+    
+
+    self.boundsView.frame =  CGRectMake(self.boundsView.frame.origin.x,
+                                        self.boundsView.frame.origin.y, 
+                                        self.boundsView.frame.size.width + translation.x,
+                                        self.boundsView.frame.size.height + aspect * translation.x);
+    x = self.slab.frame.size.width;
+    y = self.slab.frame.size.height;
+    aspect = y / x;
+
+    //newWidth, newHeight - not sure if this is the best way to go about this
+    float newWidth, newHeight;
+    newWidth = self.slab.frame.size.width + translation.x;
+    newHeight = self.slab.frame.size.height + aspect * translation.x;
+    if(self.slab.frame.origin.y + slab.frame.size.height != 240.0){
+        newHeight = 240.0 - self.slab.frame.origin.y;
+        [self.slab setNeedsDisplay];
+    }
+    
+    
+    self.slab.frame = CGRectMake(self.slab.frame.origin.x,
+                                 self.slab.frame.origin.y, 
+                                 newWidth,
+                                 newHeight);
+    
+    [recognizer setTranslation:CGPointMake(0.0, 0.0) inView:self.view];
+    if( [recognizer state] == UIGestureRecognizerStateEnded ){
+        recognizer.view.center = CGPointMake( self.boundsView.frame.origin.x + self.boundsView.frame.size.width,
+                                             self.boundsView.frame.origin.y + self.boundsView.frame.size.height);
+
+        [slab clearText];
+        [slab splitTextInString: [textInput text]];
+        [slab setNeedsDisplay];
+        NSLog(@"Redrawing");
+    }
+
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+    NSLog(@"Touches: %@ / %@", touches, event);
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -139,13 +229,7 @@
 
 -(void)textBoundsDidChangeWithFrame:(CGRect)frame{
     NSLog(@"Changed View Size, {%.1f,%.1f}, {%.1fw x %.1fh}", frame.origin.x, frame.origin.y,frame.size.width, frame.size.height);
-    if(! boundsView ){
-        boundsView = [[UIView alloc] initWithFrame:frame];
-        [boundsView setBackgroundColor:[UIColor colorWithRed:0.0 green:255.0 blue:255.0 alpha:0.5]];
-        [self.view addSubview:boundsView];
-    }else {
         boundsView.frame = frame;
-    }
     
 }
 
