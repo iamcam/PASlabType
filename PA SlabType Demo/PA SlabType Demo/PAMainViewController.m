@@ -115,52 +115,88 @@
 
 
 -(void)boxGrow:(UIPanGestureRecognizer *)recognizer{
-    NSLog(@"Growing");
+//    NSLog(@"Growing");
     float aspect, x, y;
     
     y = self.boundsView.frame.size.height;
     x = self.boundsView.frame.size.width;
     aspect = y / x;
     NSLog(@"%.1f / %.1f / %.4f", x, y, aspect);
-    
+
     CGPoint translation = [recognizer translationInView:self.view];
     recognizer.view.center = CGPointMake(recognizer.view.center.x + translation.x, 
                                          recognizer.view.center.y + aspect * translation.x);
     
+    self.boundsView.frame = CGRectMake(self.boundsView.frame.origin.x,
+                                       self.boundsView.frame.origin.y, 
+                                       self.boundsView.frame.size.width + translation.x,
+                                       self.boundsView.frame.size.height + aspect * translation.x);
 
-    self.boundsView.frame =  CGRectMake(self.boundsView.frame.origin.x,
-                                        self.boundsView.frame.origin.y, 
-                                        self.boundsView.frame.size.width + translation.x,
-                                        self.boundsView.frame.size.height + aspect * translation.x);
-    x = self.slab.frame.size.width;
-    y = self.slab.frame.size.height;
-    aspect = y / x;
+    
+    
 
-    //newWidth, newHeight - not sure if this is the best way to go about this
-    float newWidth, newHeight;
-    newWidth = self.slab.frame.size.width + translation.x;
-    newHeight = self.slab.frame.size.height + aspect * translation.x;
-    if(self.slab.frame.origin.y + slab.frame.size.height != 240.0){
-        newHeight = 240.0 - self.slab.frame.origin.y;
-        [self.slab setNeedsDisplay];
-    }
+    self.slab.frame = CGRectMake(self.boundsView.frame.origin.x, 
+                                 self.boundsView.frame.origin.y, 
+                                 self.boundsView.frame.size.width, self.slab.frame.size.height);
     
-    
-    self.slab.frame = CGRectMake(self.slab.frame.origin.x,
-                                 self.slab.frame.origin.y, 
-                                 newWidth,
-                                 newHeight);
-    
+    [self.slab setNeedsDisplay];
+//    if( [recognizer state] == UIGestureRecognizerStateEnded ){
+//        recognizer.view.center = CGPointMake( self.boundsView.frame.origin.x + self.boundsView.frame.size.width,
+//                                             self.boundsView.frame.origin.y + self.boundsView.frame.size.height);
+//
+//        [slab clearText];
+//        [slab splitTextInString: [textInput text]];
+//        [slab setNeedsDisplay];
+//        NSLog(@"Redrawing------------------------------");
+//    }
+
     [recognizer setTranslation:CGPointMake(0.0, 0.0) inView:self.view];
-    if( [recognizer state] == UIGestureRecognizerStateEnded ){
-        recognizer.view.center = CGPointMake( self.boundsView.frame.origin.x + self.boundsView.frame.size.width,
-                                             self.boundsView.frame.origin.y + self.boundsView.frame.size.height);
 
-        [slab clearText];
-        [slab splitTextInString: [textInput text]];
-        [slab setNeedsDisplay];
-        NSLog(@"Redrawing");
-    }
+//    self.boundsView.frame =  CGRectMake(self.boundsView.frame.origin.x,
+//                                        self.boundsView.frame.origin.y, 
+//                                        self.boundsView.frame.size.width + translation.x,
+//                                        self.boundsView.frame.size.height + aspect * translation.x);
+//    
+//    CGRect slabFrame = CGRectMake(self.boundsView.frame.origin.x, 
+//                                 self.boundsView.frame.origin.y, 
+//                                 self.boundsView.frame.size.width + translation.x, 
+//                                 self.boundsView.frame.size.height + aspect * translation.x);
+//    [self.slab setFrame:slabFrame];
+//    [self.slab setNeedsDisplay];
+    
+//    
+//    /*********/
+//    x = self.slab.frame.size.width;
+//    y = self.slab.frame.size.height;
+//    aspect = y / x;
+//
+//    //newWidth, newHeight - not sure if this is the best way to go about this
+//    float newWidth, newHeight;
+//    newWidth = self.slab.frame.size.width + translation.x;
+//    newHeight = self.slab.frame.size.height + aspect * translation.x;
+//    if(self.slab.frame.origin.y + slab.frame.size.height != 240.0){
+//        newHeight = 240.0 - self.slab.frame.origin.y;
+//        [self.slab setNeedsDisplay];
+//    }
+//    
+//    
+//    self.slab.frame = CGRectMake(self.slab.frame.origin.x,
+//                                 self.slab.frame.origin.y, 
+//                                 newWidth,
+//                                 newHeight);
+//    
+//    if( [recognizer state] == UIGestureRecognizerStateEnded ){
+//        recognizer.view.center = CGPointMake( self.boundsView.frame.origin.x + self.boundsView.frame.size.width,
+//                                             self.boundsView.frame.origin.y + self.boundsView.frame.size.height);
+//
+//        [slab clearText];
+//        [slab splitTextInString: [textInput text]];
+//        [slab setNeedsDisplay];
+//        NSLog(@"Redrawing------------------------------");
+//    }
+//    
+//    [recognizer setTranslation:CGPointMake(0.0, 0.0) inView:self.view];
+
 
 }
 
@@ -227,9 +263,15 @@
     }
 }
 
+// This is the visible text height
 -(void)textBoundsDidChangeWithFrame:(CGRect)frame{
     NSLog(@"Changed View Size, {%.1f,%.1f}, {%.1fw x %.1fh}", frame.origin.x, frame.origin.y,frame.size.width, frame.size.height);
-        boundsView.frame = frame;
+    self.boundsView.frame = frame;
+
+    CGPoint handleCenter = CGPointMake(frame.origin.x + frame.size.width, 
+                                       frame.origin.y + frame.size.height);
+    self.eastHandle.center = handleCenter;
+    
     
 }
 

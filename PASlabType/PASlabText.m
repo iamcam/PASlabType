@@ -67,7 +67,7 @@
     sentence = [string stringByReplacingOccurrencesOfString:@"\n" withString:@"\n "];
     boxWidth = self.frame.size.width;
     boxHeight = self.frame.size.height;
-    NSLog(@"This is the init: %@", sentence);
+//    NSLog(@"This is the init: %@", sentence);
     
     // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
     idealLineLength = 20;
@@ -91,13 +91,13 @@
         idealCharCountPerLine = manualCharCountPerLine;
     }
 
-    NSLog(@"idealLineLength: %d",idealLineLength);
-    NSLog(@"charAspectRatio: %f", charAspectRatio);
-    NSLog(@"idealLineAspectRatio: %f", idealLineAspectRatio);
-    NSLog(@"idealLineHeight: %f",idealLineHeight);
-    NSLog(@"hypotheticalLineCount: %d",hypotheticalLineCount);
-    NSLog(@"idealCharCountPerLine: %d",idealCharCountPerLine);
-    NSLog(@"%f h x %f w",boxHeight, boxWidth);
+//    NSLog(@"idealLineLength: %d",idealLineLength);
+//    NSLog(@"charAspectRatio: %f", charAspectRatio);
+//    NSLog(@"idealLineAspectRatio: %f", idealLineAspectRatio);
+//    NSLog(@"idealLineHeight: %f",idealLineHeight);
+//    NSLog(@"hypotheticalLineCount: %d",hypotheticalLineCount);
+//    NSLog(@"idealCharCountPerLine: %d",idealCharCountPerLine);
+    NSLog(@"Box: %f h x %f w",boxHeight, boxWidth);
 
     if (words == NULL) {
         words = [NSMutableArray arrayWithCapacity:0];
@@ -210,7 +210,7 @@
 -(NSAttributedString *)sizeLineToFit:(NSString *)line {
     float scale = 1.0f;
     float fontSize = 6.0f;    
-    NSLog(@"Line: %@", line);
+//    NSLog(@"Line: %@", line);
     
     
     CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[font fontName], (fontSize * scale), NULL);
@@ -253,7 +253,7 @@
     if([lineInfo count] > 0){
         float prevDesc = [[[lineInfo lastObject] objectForKey:@"descent"] floatValue];
         maxLineHeight = [font lineHeightUsingScale:scale ascent:ascent descent:descent previousDescent:prevDesc]; //there's also a similar func that uses leading.
-        NSLog(@"Previous Descent: %.3f", prevDesc);
+//        NSLog(@"Previous Descent: %.3f", prevDesc);
     } else {
         //TODO: This is maybe another place to consider a custom per-font method.
         maxLineHeight = (ascent + descent) * scale;
@@ -359,11 +359,11 @@
      */
     CGSize constraints = CGSizeMake(self.frame.size.width, self.frame.size.height);
     CGSize suggestedSize = CTFramesetterSuggestFrameSizeWithConstraints(framesetter, CFRangeMake(0,[attString length]), NULL, constraints, &range);
-    NSLog(@"Suggested\tw:%f\th:%f\tlen:%d\tloc:%d",suggestedSize.width, suggestedSize.height, (int) range.length, (int) range.location);
-    NSLog(@"Actual: \tw:%f,\th:%f",self.frame.size.width, self.frame.size.height);
+//    NSLog(@"Suggested\tw:%f\th:%f\tlen:%d\tloc:%d",suggestedSize.width, suggestedSize.height, (int) range.length, (int) range.location);
+//    NSLog(@"Actual: \tw:%f,\th:%f",self.frame.size.width, self.frame.size.height);
     
     range = CTFrameGetVisibleStringRange(frame);
-    NSLog(@"visible: %d\tnot Visible: %d", (int) range.length,(int) ([attString length] - range.length)-1);
+//    NSLog(@"visible: %d\tnot Visible: %d", (int) range.length,(int) ([attString length] - range.length)-1);
     int invisibleStart = range.length;
     NSString *plainString = [attString string];
 
