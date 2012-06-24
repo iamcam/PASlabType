@@ -110,7 +110,28 @@
     self.eastHandle.center = CGPointMake(recognizer.view.frame.origin.x + recognizer.view.frame.size.width,
                                          recognizer.view.frame.origin.y + recognizer.view.frame.size.height);
     
-    self.slab.frame = CGRectMake(recognizer.view.frame.origin.x, recognizer.view.frame.origin.y, self.slab.frame.size.width, self.slab.frame.size.height);
+    
+    // The orignal way preserves the full slab height no matter where we are positioning the box
+    // self.slab.frame = CGRectMake(recognizer.view.frame.origin.x, recognizer.view.frame.origin.y, self.slab.frame.size.width, self.slab.frame.size.height);
+    
+    // This next section makes sure we more or less take up the full height of the viewable area for the text.
+    // Moving the box too far down decreases our viewable text area
+    // It would probably be a better idea to allow the descender of the last line to go beyond our text bounds.
+    float y = self.boundsView.frame.origin.y + self.boundsView.frame.size.height;
+    float newHeight = self.slab.frame.size.height;
+    NSLog(@"nh: %.2f",newHeight);
+    
+    if( y != 240.0 ){
+        newHeight = 240.0 - self.slab.frame.origin.y;
+    }
+    self.slab.frame = CGRectMake(self.boundsView.frame.origin.x, 
+                                 self.boundsView.frame.origin.y, 
+                                 self.boundsView.frame.size.width, 
+                                 newHeight);
+    
+    [self.slab setNeedsDisplay];
+
+    
     
     [recognizer setTranslation:CGPointMake(0.0, 0.0) inView:self.view];
 }
