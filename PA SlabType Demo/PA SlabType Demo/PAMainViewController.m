@@ -133,11 +133,17 @@
                                        self.boundsView.frame.size.height + aspect * translation.x);
 
     
-    
+    y = self.boundsView.frame.origin.y + self.boundsView.frame.size.height;
+    float newHeight = self.slab.frame.size.height;
+    NSLog(@"nh: %.2f",newHeight);
 
+    if( y != 240.0 ){
+        newHeight = 240.0 - self.slab.frame.origin.y;
+    }
     self.slab.frame = CGRectMake(self.boundsView.frame.origin.x, 
                                  self.boundsView.frame.origin.y, 
-                                 self.boundsView.frame.size.width, self.slab.frame.size.height);
+                                 self.boundsView.frame.size.width, 
+                                 newHeight);
     
     [self.slab setNeedsDisplay];
 
