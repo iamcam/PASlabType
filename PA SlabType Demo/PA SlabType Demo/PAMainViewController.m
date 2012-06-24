@@ -96,7 +96,9 @@
     [self.eastHandle addGestureRecognizer:self.eastHandlePan];
     [self.boundsView addGestureRecognizer:self.boxPan];
 
-
+    // Bring the slab view to the front and tell it to not pay attention to user touches
+    [self.view bringSubviewToFront:self.slab];
+    [slab setUserInteractionEnabled:NO];
 }
 
 -(void)moveBoxText:(UIPanGestureRecognizer *)recognizer {
