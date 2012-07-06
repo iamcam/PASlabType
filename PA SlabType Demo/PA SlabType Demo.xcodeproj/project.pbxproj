@@ -52,7 +52,6 @@
 		C229BB83158CD876008CF650 /* PASlabFont.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASlabFont.m; path = ../PASlabType/PASlabFont.m; sourceTree = "<group>"; };
 		C229BB86158CD93F008CF650 /* PASlabFontChunkFive.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASlabFontChunkFive.h; path = ../PASlabType/PASlabFontChunkFive.h; sourceTree = "<group>"; };
 		C229BB87158CD93F008CF650 /* PASlabFontChunkFive.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASlabFontChunkFive.m; path = ../PASlabType/PASlabFontChunkFive.m; sourceTree = "<group>"; };
-		C229BB95158D6BB3008CF650 /* PAFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAFonts.h; sourceTree = "<group>"; };
 		C229BB9A158D96FD008CF650 /* PASlabFontLeagueGothic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASlabFontLeagueGothic.h; path = ../PASlabType/PASlabFontLeagueGothic.h; sourceTree = "<group>"; };
 		C229BB9B158D96FE008CF650 /* PASlabFontLeagueGothic.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASlabFontLeagueGothic.m; path = ../PASlabType/PASlabFontLeagueGothic.m; sourceTree = "<group>"; };
 		C249E6CA155C9331005FD83D /* League Gothic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "League Gothic.otf"; path = "../Fonts/League Gothic/League Gothic.otf"; sourceTree = "<group>"; };
@@ -60,6 +59,7 @@
 		C249E6CE155C95DB005FD83D /* Raleway Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Raleway Thin.otf"; path = "../Fonts/Raleway/Raleway Thin.otf"; sourceTree = "<group>"; };
 		C249E6D0155C971D005FD83D /* Ostrich Rounded.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Ostrich Rounded.ttf"; path = "../Fonts/Ostrich Sans/Ostrich Rounded.ttf"; sourceTree = "<group>"; };
 		C249E6D7155C9994005FD83D /* LeagueScriptNumberOne.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = LeagueScriptNumberOne.otf; path = "../Fonts/League Script Number One/LeagueScriptNumberOne.otf"; sourceTree = "<group>"; };
+		C24FE40415A6B86600BBEE9E /* PAFonts.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAFonts.h; path = ../PASlabType/PAFonts.h; sourceTree = "<group>"; };
 		C2615DEF155B3DF9009C8367 /* readme.markdown */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = readme.markdown; path = ../Fonts/readme.markdown; sourceTree = "<group>"; };
 		C26F24011559E57B008121FC /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		C28143B215539A8500399EA4 /* PA SlabType Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PA SlabType Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -124,7 +124,7 @@
 		C229BB89158D5C51008CF650 /* FontClasses */ = {
 			isa = PBXGroup;
 			children = (
-				C229BB95158D6BB3008CF650 /* PAFonts.h */,
+				C24FE40415A6B86600BBEE9E /* PAFonts.h */,
 				C229BB82158CD876008CF650 /* PASlabFont.h */,
 				C229BB83158CD876008CF650 /* PASlabFont.m */,
 				C229BB86158CD93F008CF650 /* PASlabFontChunkFive.h */,
