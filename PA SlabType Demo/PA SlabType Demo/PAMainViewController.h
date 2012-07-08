@@ -26,7 +26,7 @@
 -(IBAction)sliderDidUpdateWithValue: (id) sender;
 -(IBAction)boxSliderUpdated: (id) sender;
 
--(void)boxPan:(UIPanGestureRecognizer *)recognizer;
+//-(void)panBox:(UIPanGestureRecognizer *)recognizer;
 -(void)boxGrow:(UIPanGestureRecognizer *)recognizer;
 
 

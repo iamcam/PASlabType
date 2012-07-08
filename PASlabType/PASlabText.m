@@ -67,15 +67,11 @@
     sentence = [string stringByReplacingOccurrencesOfString:@"\n" withString:@"\n "];
     boxWidth = self.frame.size.width;
     boxHeight = self.frame.size.height;
-//    NSLog(@"This is the init: %@", sentence);
-    
-    // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
-    idealLineLength = 20;
-    charAspectRatio = 0.324324324f; //League Gothic
-    charAspectRatio = 0.2;
-    idealLineAspectRatio = charAspectRatio * idealLineLength; // 0.44518217 * 12 = 5.4218604
-    
 
+    // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
+    idealLineLength = [font idealCharCountPerLine];
+    charAspectRatio = [font charAspectRatio]; //aspect ratio isn't really that useful in many cases
+    idealLineAspectRatio = charAspectRatio * idealLineLength; // 0.44518217 * 12 = 5.4218604
     
     idealLineHeight = boxWidth / idealLineAspectRatio;
     hypotheticalLineCount = floor(boxHeight / idealLineHeight);
@@ -83,21 +79,14 @@
     
     // TODO: will figuring out how many lines we really have do anything to change?
     idealCharCountPerLine = (int)round([string length]/hypotheticalLineCount);
-    idealCharCountPerLine = 22;
+
+    idealCharCountPerLine = [font idealCharCountPerLine]; //22 is a good place to start
     if(idealCharCountPerLine == 0)
         idealCharCountPerLine = 1;
 
     if(manualCharCountPerLine > 0){
         idealCharCountPerLine = manualCharCountPerLine;
     }
-
-//    NSLog(@"idealLineLength: %d",idealLineLength);
-//    NSLog(@"charAspectRatio: %f", charAspectRatio);
-//    NSLog(@"idealLineAspectRatio: %f", idealLineAspectRatio);
-//    NSLog(@"idealLineHeight: %f",idealLineHeight);
-//    NSLog(@"hypotheticalLineCount: %d",hypotheticalLineCount);
-//    NSLog(@"idealCharCountPerLine: %d",idealCharCountPerLine);
-    NSLog(@"Box: %f h x %f w",boxHeight, boxWidth);
 
     if (words == NULL) {
         words = [NSMutableArray arrayWithCapacity:0];

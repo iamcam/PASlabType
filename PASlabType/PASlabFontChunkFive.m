@@ -14,6 +14,8 @@
     if(!(self=[super init])){
         return nil;
     }
+    [self setCharAspectRatio:0.8];
+
     return self;
 }
 

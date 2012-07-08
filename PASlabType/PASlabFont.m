@@ -10,7 +10,7 @@
 
 
 @implementation PASlabFont
-@synthesize fontName;
+@synthesize fontName, charAspectRatio, idealCharCountPerLine;
 
 /*
  * Default init - pretty much only if a font was selected for which we have no class
@@ -23,7 +23,10 @@
     //Return the system default
     fontName = [[UIFont systemFontOfSize:6.0] fontName];
     NSLog(@"Setting default system font: %@", fontName);
-    //any other init code?
+    
+    [self setCharAspectRatio:0.20];
+    [self setIdealCharCountPerLine:22];
+    
     return self;
 }
 
@@ -32,13 +35,12 @@
     // Some fonts require a separate class to manage some metrics
     NSString *tmpName = [name stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSString *className= [NSString stringWithFormat:@"PASlabFont%@", tmpName];
-    id fontObj = [[NSClassFromString(className) alloc] init];
+    NSLog(@"Font Class: %@", className);
+    PASlabFont* fontObj = [[NSClassFromString(className) alloc] init];
     
     // If there is no class, simply pass the font name and the standard rules will apply
     if(!fontObj){
-        self = [super init];
-        fontName = name;
-        return self;
+        fontObj = [self init];
     }
 
     [fontObj setFontName: name];

@@ -13,6 +13,8 @@
 }
 
 @property (nonatomic, retain) NSString *fontName;
+@property (nonatomic, readwrite) float charAspectRatio;
+@property (nonatomic, readwrite) int idealCharCountPerLine;
 
 -(id) init;
 -(id) initWithFontName:(NSString *)name;

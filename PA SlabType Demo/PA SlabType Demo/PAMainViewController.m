@@ -48,7 +48,7 @@
         slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 110, 230)];
         [slab setDelegate:self];
         [slab selectFontWithName:@"ChunkFive"];
-        [slab selectFontWithName:@"League Gothic"];
+//        [slab selectFontWithName:@"League Gothic"];
         //    slab = [[PASlabText alloc] initWithFrame:CGRectMake(10.0, 10.0, 150, 210)];
         //        slab = [[PASlabText alloc] initWithFrame:CGRectMake(10, 10,152.0 , 232.0f)];
     }
@@ -60,10 +60,9 @@
     //    [string setString:@" I might push towards poke for dinner tonight"];
     //    [string setString:@"Another day, another iOS surprise"];
     //    [string setString:@"Stop Selling & Start Telling"];
-    [string setString:[@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example" capitalizedString]];
+    [string setString:@"Leadership has nothing to do with a person's title, but it has everything to do with a person's example"];
 //    [string setString:@"Leadership has nothing to do w\nsomethingorother"];
 //    [string setString:@"THIS COULD BE THE\nGOLDEN\nTICKET THAT GETS US TO WONKA"];
-
     //    [string setString:@"Passion leads"];
     //    [string setString:@"\"Debt robs you of your options.\""];
     //    [string setString:@"Violence might be verbal violence the cos put on the women"];
@@ -71,6 +70,7 @@
 //        [string setString:@"Debt robs you of your options."];
     
 //    [string setString:@""];
+    [string setString:[string uppercaseString]];
     
     [slab splitTextInString:string];
     [textInput setText:[slab sentence]];
