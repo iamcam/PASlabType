@@ -359,8 +359,9 @@
     // I think it makes sense to just convert newlines to spaces, but that is probably a better job done *outside* the class.
     // [overflow setString:[[plainString substringFromIndex: invisibleStart] stringByReplacingOccurrencesOfString:@"\n" withString:@" "]]; 
     [overflow setString:[plainString substringFromIndex:invisibleStart]];
-
-    NSLog(@"Overflow: %@", overflow);
+    if(overflow.length>0){
+        NSLog(@"Overflow: %@", overflow);
+    }
     
     CTFrameDraw(frame, context); //4
     
