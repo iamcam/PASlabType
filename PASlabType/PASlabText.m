@@ -30,7 +30,7 @@
         boxWidth = self.frame.size.width;
         boxHeight = self.frame.size.height;
         [self setOpaque:NO];
-        [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.15]];
+//        [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.15]];
         overflow = [[NSMutableString alloc] initWithString:@""];
 
         if(!fontChoices){
