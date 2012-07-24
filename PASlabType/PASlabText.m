@@ -63,7 +63,7 @@
 // FIXME: if there is only one line, large text is clipped
 // TODO: Test w/ Dave Ramsey quote and chunk5: "example" w/ and w/o \n
 -(void) splitTextInString: (NSString *)string {
-
+    [self clearText];
     sentence = [string stringByReplacingOccurrencesOfString:@"\n" withString:@"\n "];
     boxWidth = self.frame.size.width;
     boxHeight = self.frame.size.height;
