@@ -397,7 +397,25 @@
     
 }
 
+-(PASlabText *) copy {
+    PASlabText *tmp = [[PASlabText alloc] initWithFrame:self.frame];
+    [tmp setSelectedFontDict:self.selectedFontDict];
+    [tmp setFont:self.font];
+    [tmp setCharAspectRatio:self.charAspectRatio];
+    [tmp setIdealLineHeight:self.idealLineHeight];
+    [tmp setIdealLineAspectRatio:self.idealLineAspectRatio];
+    [tmp setBoxWidth:self.boxWidth];
+    [tmp setBoxHeight:self.boxHeight];
+    [tmp setManualCharCountPerLine:self.manualCharCountPerLine];
+    [tmp setColor:self.color];
+    [tmp setStrokeColor:self.strokeColor];
+    [tmp setStrokeWidth:self.strokeWidth];
+    [tmp setFontChoices:self.fontChoices];
 
+    [tmp splitTextInString:self.sentence];
+    return tmp;
+
+}
 @end
 
 
