@@ -160,7 +160,7 @@
         [lines addObject: [NSString stringWithFormat:@"%@",finalText]];
 
     }
-    NSLog(@"%@",lines);    
+//    NSLog(@"%@",lines);    
  
 }
 
