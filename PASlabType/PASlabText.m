@@ -39,7 +39,7 @@
             font = [[PASlabFont alloc] init];
             fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",  @"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
-            strokeColor = [UIColor blueColor];
+            strokeColor = [UIColor clearColor];
             [self setStrokeWidth:0.0f];
 
         }
