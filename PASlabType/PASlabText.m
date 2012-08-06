@@ -30,7 +30,7 @@
         boxWidth = self.frame.size.width;
         boxHeight = self.frame.size.height;
         [self setOpaque:NO];
-        [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.15]];
+//        [self setBackgroundColor:[UIColor colorWithRed:1.0f green:1.0f blue:1.0f alpha:0.15]];
         overflow = [[NSMutableString alloc] initWithString:@""];
 
         if(!fontChoices){
@@ -39,7 +39,7 @@
             font = [[PASlabFont alloc] init];
             fontChoices = [NSArray  arrayWithObjects:@"Raleway-Thin",  @"League Gothic",@"League Script Thin",@"Ostrich Sans Rounded",@"ChunkFive", nil];
             color = [UIColor colorWithRed:1.0 green:1.0 blue:1.0 alpha:0.85];
-            strokeColor = [UIColor blueColor];
+            strokeColor = [UIColor clearColor];
             [self setStrokeWidth:0.0f];
 
         }
@@ -63,7 +63,7 @@
 // FIXME: if there is only one line, large text is clipped
 // TODO: Test w/ Dave Ramsey quote and chunk5: "example" w/ and w/o \n
 -(void) splitTextInString: (NSString *)string {
-
+    [self clearText];
     sentence = [string stringByReplacingOccurrencesOfString:@"\n" withString:@"\n "];
     boxWidth = self.frame.size.width;
     boxHeight = self.frame.size.height;
@@ -160,7 +160,7 @@
         [lines addObject: [NSString stringWithFormat:@"%@",finalText]];
 
     }
-    NSLog(@"%@",lines);    
+//    NSLog(@"%@",lines);    
  
 }
 
@@ -359,8 +359,9 @@
     // I think it makes sense to just convert newlines to spaces, but that is probably a better job done *outside* the class.
     // [overflow setString:[[plainString substringFromIndex: invisibleStart] stringByReplacingOccurrencesOfString:@"\n" withString:@" "]]; 
     [overflow setString:[plainString substringFromIndex:invisibleStart]];
-
-    NSLog(@"Overflow: %@", overflow);
+    if(overflow.length>0){
+        NSLog(@"Overflow: %@", overflow);
+    }
     
     CTFrameDraw(frame, context); //4
     
@@ -396,7 +397,25 @@
     
 }
 
+-(PASlabText *) copy {
+    PASlabText *tmp = [[PASlabText alloc] initWithFrame:self.frame];
+    [tmp setSelectedFontDict:self.selectedFontDict];
+    [tmp setFont:self.font];
+    [tmp setCharAspectRatio:self.charAspectRatio];
+    [tmp setIdealLineHeight:self.idealLineHeight];
+    [tmp setIdealLineAspectRatio:self.idealLineAspectRatio];
+    [tmp setBoxWidth:self.boxWidth];
+    [tmp setBoxHeight:self.boxHeight];
+    [tmp setManualCharCountPerLine:self.manualCharCountPerLine];
+    [tmp setColor:self.color];
+    [tmp setStrokeColor:self.strokeColor];
+    [tmp setStrokeWidth:self.strokeWidth];
+    [tmp setFontChoices:self.fontChoices];
 
+    [tmp splitTextInString:self.sentence];
+    return tmp;
+
+}
 @end
 
 
