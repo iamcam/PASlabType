@@ -69,8 +69,8 @@
     boxHeight = self.frame.size.height;
 
     // These two are interchangeable for now, but idealCharCountPerLine is a perferred calculation
-    idealLineLength = [font idealCharCountPerLine];
-    charAspectRatio = [font charAspectRatio]; //aspect ratio isn't really that useful in many cases
+    idealLineLength = [self.font idealCharCountPerLine];
+    charAspectRatio = [self.font charAspectRatio]; //aspect ratio isn't really that useful in many cases
     idealLineAspectRatio = charAspectRatio * idealLineLength; // 0.44518217 * 12 = 5.4218604
     
     idealLineHeight = boxWidth / idealLineAspectRatio;
@@ -80,7 +80,7 @@
     // TODO: will figuring out how many lines we really have do anything to change?
     idealCharCountPerLine = (int)round([string length]/hypotheticalLineCount);
 
-    idealCharCountPerLine = [font idealCharCountPerLine]; //22 is a good place to start
+    idealCharCountPerLine = [self.font idealCharCountPerLine]; //22 is a good place to start
     if(idealCharCountPerLine == 0)
         idealCharCountPerLine = 1;
 
@@ -202,7 +202,7 @@
 //    NSLog(@"Line: %@", line);
     
     
-    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[font fontName], (fontSize * scale), NULL);
+    CTFontRef fontRef = CTFontCreateWithName((__bridge CFStringRef)[self.font fontName], (fontSize * scale), NULL);
     
     /********/
 
@@ -241,7 +241,7 @@
 
     if([lineInfo count] > 0){
         float prevDesc = [[[lineInfo lastObject] objectForKey:@"descent"] floatValue];
-        maxLineHeight = [font lineHeightUsingScale:scale ascent:ascent descent:descent previousDescent:prevDesc]; //there's also a similar func that uses leading.
+        maxLineHeight = [self.font lineHeightUsingScale:scale ascent:ascent descent:descent previousDescent:prevDesc]; //there's also a similar func that uses leading.
 //        NSLog(@"Previous Descent: %.3f", prevDesc);
     } else {
         //TODO: This is maybe another place to consider a custom per-font method.
@@ -269,7 +269,7 @@
     //CF vars aren't controlled by ARC, so we need to be a little more careful with retain/release
     CFBridgingRelease(fontRef);
     
-    fontRef = CTFontCreateWithName((__bridge CFStringRef) [font fontName], newFontSize, NULL);
+    fontRef = CTFontCreateWithName((__bridge CFStringRef) [self.font fontName], newFontSize, NULL);
     attrs = [NSDictionary dictionaryWithObjectsAndKeys:
              (id) self.color.CGColor, kCTForegroundColorAttributeName,
              (__bridge id) fontRef, kCTFontAttributeName,

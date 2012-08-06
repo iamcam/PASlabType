@@ -8,5 +8,6 @@ PASlabType is a stripped-down and built-up port of Eric Loyer's [SlabType algori
 ##Requirements & Installation
 + Add CoreText.framework to your project's Build Phases (Link Binary With Libraries)
 + Add the postscript (usually) names of the fonts you're using in the project to the project's plist file (See the demo)
++ Add fonts to the app's Target (Build Phases -> Copy Bundle Resources)
 + reference the PASlabType.h file in your controller's header
 
