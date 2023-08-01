@@ -2,10 +2,12 @@ This package was developed as part of a first-party live effects photo editing a
 
 Feel free to use this code as inspiration for your own version, as I've done with Eric Loyer's and @freqdec's. If you migrate it to another language or platform, I'd love to hear about it!
 
-This is copyright 2023 Cameron Perry, and distributed under the Creative Commonse Attribution-NonCommercial-ShareAlike (CC BY-NC-SA) [license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode). 
+This is copyright 2023 Cameron Perry, and distributed under the Creative Commonse Attribution-NonCommercial-ShareAlike (CC BY-NC-SA) [license](https://creativecommons.org/licenses/by-nc-sa/4.0/legalcode).
 
 ---
 # PASlabType
+
+![Slab Type sample image](docs/sample.png)
 
 PASlabType is a stripped-down and built-up port of Eric Loyer's [SlabType algorithm][1] for ActionScript and @freqdec's [slabText jQuery plugin][2]
 
@@ -15,5 +17,5 @@ PASlabType is a stripped-down and built-up port of Eric Loyer's [SlabType algori
 + Add fonts to the app's Target (Build Phases -> Copy Bundle Resources)
 + reference the PASlabType.h file in your controller's header
 
-[1]: http://erikloyer.com/index.php/blog/the_slabtype_algorithm_part_1_background/                         
+[1]: http://erikloyer.com/index.php/blog/the_slabtype_algorithm_part_1_background/
 [2]: https://github.com/freqdec/slabText
